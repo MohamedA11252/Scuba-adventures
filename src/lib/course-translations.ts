@@ -17,7 +17,6 @@ type CourseTranslation = {
   includes: string[];
   excludes: string[];
   image: string;
-  images: string[];
 };
 
 type SpecialtyTranslation = {
@@ -34,7 +33,6 @@ type SpecialtyTranslation = {
   includes: string[];
   excludes: string[];
   image: string;
-  images: string[];
 };
 
 const coursesEN: CourseTranslation[] = [
@@ -82,12 +80,6 @@ Now that you have taken your first scuba diving lesson, you are well on your way
     ],
     excludes: [],
     image: courseImage("course-bubblemaker"),
-    images: [
-      courseImage("course-bubblemaker-01"),
-      courseImage("course-bubblemaker-02"),
-      courseImage("course-bubblemaker-03"),
-      courseImage("course-bubblemaker-04")
-    ]
   },
   {
     id: "course-owd",
@@ -142,11 +134,6 @@ Depth: expect shallow dives (12m/40ft), the maximum allowed depth is 18m/60ft`,
     ],
     excludes: [],
     image: courseImage("course-owd"),
-    images: [
-      courseImage("course-owd-01"),
-      courseImage("course-owd-02"),
-      courseImage("course-owd-03")
-    ]
   },
   {
     id: "course-aowd",
@@ -219,12 +206,6 @@ Once you have completed the PADI Advanced Open Water Diver course we know that y
       "Physical Card from PADI"
     ],
     image: courseImage("course-aowd"),
-    images: [
-      courseImage("course-aowd-01"),
-      courseImage("course-aowd-02"),
-      courseImage("course-aowd-03"),
-      courseImage("course-aowd-04")
-    ]
   },
   {
     id: "course-efr",
@@ -270,11 +251,6 @@ If you're taking your EFR there is a good change that you are taking the steps t
     ],
     excludes: [],
     image: courseImage("course-efr"),
-    images: [
-      courseImage("course-efr-01"),
-      courseImage("course-efr-02"),
-      courseImage("course-efr-03")
-    ]
   },
   {
     id: "course-rescue",
@@ -346,11 +322,6 @@ Once you have completed the PADI Rescue Diver course you are almost at the top o
       "Dive Computer"
     ],
     image: courseImage("course-rescue"),
-    images: [
-      courseImage("course-rescue-01"),
-      courseImage("course-rescue-02"),
-      courseImage("course-rescue-03")
-    ]
   },
   {
     id: "course-divemaster",
@@ -438,11 +409,6 @@ Wondering what's next? Check out the PADI Assistant Instructor or PADI Open Wate
       "PADI certification fee"
     ],
     image: courseImage("course-divemaster"),
-    images: [
-      courseImage("course-divemaster-01"),
-      courseImage("course-divemaster-02"),
-      courseImage("course-divemaster-03")
-    ]
   },
   {
     id: "course-reactivate",
@@ -474,10 +440,6 @@ After this course, you can continue your diving trip as usual.`,
       "Equipment"
     ],
     image: courseImage("course-reactivate"),
-    images: [
-      courseImage("course-reactivate-01"),
-      courseImage("course-reactivate-02")
-    ]
   },
   {
     id: "course-junior",
@@ -527,10 +489,6 @@ day in the class room (theory and knowledge reviews) and confined water dives.
       "Any personal expenses."
     ],
     image: courseImage("course-junior"),
-    images: [
-      courseImage("course-junior-01"),
-      courseImage("course-junior-02")
-    ]
   },
   {
     id: "course-jowd",
@@ -602,10 +560,6 @@ Once you reach the age of 15 you have the option of moving onto the PADI Advance
     ],
     excludes: [],
     image: courseImage("course-jowd"),
-    images: [
-      courseImage("course-jowd-01"),
-      courseImage("course-jowd-02")
-    ]
   }
 ];
 
@@ -654,12 +608,6 @@ Po pierwszej lekcji nurkowania jesteś na drodze do zostania certyfikowanym nurk
     ],
     excludes: [],
     image: courseImage("course-bubblemaker"),
-    images: [
-      courseImage("course-bubblemaker-01"),
-      courseImage("course-bubblemaker-02"),
-      courseImage("course-bubblemaker-03"),
-      courseImage("course-bubblemaker-04")
-    ]
   },
   {
     id: "course-owd",
@@ -714,11 +662,6 @@ Głębokość: płytkie nurkowania (12m/40ft), maksymalna dozwolona głębokoś�
     ],
     excludes: [],
     image: courseImage("course-owd"),
-    images: [
-      courseImage("course-owd-01"),
-      courseImage("course-owd-02"),
-      courseImage("course-owd-03")
-    ]
   },
   {
     id: "course-aowd",
@@ -788,12 +731,6 @@ Po ukończeniu kursu polecamy zapoznać się z ofertą kursów specjalnościowyc
       "Fizyczna karta od PADI"
     ],
     image: courseImage("course-aowd"),
-    images: [
-      courseImage("course-aowd-01"),
-      courseImage("course-aowd-02"),
-      courseImage("course-aowd-03"),
-      courseImage("course-aowd-04")
-    ]
   },
   {
     id: "course-efr",
@@ -839,11 +776,6 @@ Jeśli przechodzisz EFR, prawdopodobnie robisz kroki w kierunku zostania PADI Re
     ],
     excludes: [],
     image: courseImage("course-efr"),
-    images: [
-      courseImage("course-efr-01"),
-      courseImage("course-efr-02"),
-      courseImage("course-efr-03")
-    ]
   },
   {
     id: "course-rescue",
@@ -913,11 +845,6 @@ Po ukończeniu kursu jesteś prawie na szczycie rekreacyjnej edukacji nurkowej. 
       "Komputer nurkowy"
     ],
     image: courseImage("course-rescue"),
-    images: [
-      courseImage("course-rescue-01"),
-      courseImage("course-rescue-02"),
-      courseImage("course-rescue-03")
-    ]
   },
   {
     id: "course-divemaster",
@@ -997,11 +924,6 @@ Minimum 40 zalogowanych nurkowań, aby rozpocząć kurs i 60 nurkowań, aby uzys
       "Opłata za certyfikację PADI"
     ],
     image: courseImage("course-divemaster"),
-    images: [
-      courseImage("course-divemaster-01"),
-      courseImage("course-divemaster-02"),
-      courseImage("course-divemaster-03")
-    ]
   },
   {
     id: "course-reactivate",
@@ -1033,10 +955,6 @@ Po tym kursie możesz kontynuować swoją przygodę nurkową jak zwykle.`,
       "Sprzęt"
     ],
     image: courseImage("course-reactivate"),
-    images: [
-      courseImage("course-reactivate-01"),
-      courseImage("course-reactivate-02")
-    ]
   },
   {
     id: "course-junior",
@@ -1086,10 +1004,6 @@ dzień w sali (teoria i przeglądy wiedzy) i nurkowania w wodach zamkniętych.
       "Wydatki osobiste."
     ],
     image: courseImage("course-junior"),
-    images: [
-      courseImage("course-junior-01"),
-      courseImage("course-junior-02")
-    ]
   },
   {
     id: "course-jowd",
@@ -1155,10 +1069,6 @@ Po ukończeniu 15 lat masz możliwość przejścia na kurs PADI Advanced Open Wa
     ],
     excludes: [],
     image: courseImage("course-jowd"),
-    images: [
-      courseImage("course-jowd-01"),
-      courseImage("course-jowd-02")
-    ]
   }
 ];
 
@@ -1207,12 +1117,6 @@ PADI Bubblemaker проходит на одном из наших местных
     ],
     excludes: [],
     image: courseImage("course-bubblemaker"),
-    images: [
-      courseImage("course-bubblemaker-01"),
-      courseImage("course-bubblemaker-02"),
-      courseImage("course-bubblemaker-03"),
-      courseImage("course-bubblemaker-04")
-    ]
   },
   {
     id: "course-owd",
@@ -1265,11 +1169,6 @@ PADI eLearning позволяет легко вписать уроки дайв�
     ],
     excludes: [],
     image: courseImage("course-owd"),
-    images: [
-      courseImage("course-owd-01"),
-      courseImage("course-owd-02"),
-      courseImage("course-owd-03")
-    ]
   },
   {
     id: "course-aowd",
@@ -1331,12 +1230,6 @@ E-Learn перед погружением
       "Физическая карта от PADI"
     ],
     image: courseImage("course-aowd"),
-    images: [
-      courseImage("course-aowd-01"),
-      courseImage("course-aowd-02"),
-      courseImage("course-aowd-03"),
-      courseImage("course-aowd-04")
-    ]
   },
   {
     id: "course-efr",
@@ -1378,11 +1271,6 @@ E-Learn перед погружением
     ],
     excludes: [],
     image: courseImage("course-efr"),
-    images: [
-      courseImage("course-efr-01"),
-      courseImage("course-efr-02"),
-      courseImage("course-efr-03")
-    ]
   },
   {
     id: "course-rescue",
@@ -1446,11 +1334,6 @@ Emergency First Response и Первая Помощь
       "Дайв-компьютер"
     ],
     image: courseImage("course-rescue"),
-    images: [
-      courseImage("course-rescue-01"),
-      courseImage("course-rescue-02"),
-      courseImage("course-rescue-03")
-    ]
   },
   {
     id: "course-divemaster",
@@ -1517,11 +1400,6 @@ Emergency First Response и Первая Помощь
       "Плата за сертификацию PADI"
     ],
     image: courseImage("course-divemaster"),
-    images: [
-      courseImage("course-divemaster-01"),
-      courseImage("course-divemaster-02"),
-      courseImage("course-divemaster-03")
-    ]
   },
   {
     id: "course-reactivate",
@@ -1553,10 +1431,6 @@ Emergency First Response и Первая Помощь
       "Снаряжение"
     ],
     image: courseImage("course-reactivate"),
-    images: [
-      courseImage("course-reactivate-01"),
-      courseImage("course-reactivate-02")
-    ]
   },
   {
     id: "course-junior",
@@ -1602,10 +1476,6 @@ Emergency First Response и Первая Помощь
       "Личные расходы."
     ],
     image: courseImage("course-junior"),
-    images: [
-      courseImage("course-junior-01"),
-      courseImage("course-junior-02")
-    ]
   },
   {
     id: "course-jowd",
@@ -1667,10 +1537,6 @@ E-Learn перед погружением
     ],
     excludes: [],
     image: courseImage("course-jowd"),
-    images: [
-      courseImage("course-jowd-01"),
-      courseImage("course-jowd-02")
-    ]
   }
 ];
 
@@ -1722,10 +1588,6 @@ Planning & executing a deep dive is awesome enough but why not take advantage of
     ],
     excludes: [],
     image: specialtyImage("spec-deep"),
-    images: [
-      specialtyImage("spec-deep-01"),
-      specialtyImage("spec-deep-02")
-    ]
   },
   {
     id: "spec-night",
@@ -1770,10 +1632,6 @@ Now you have seen marine life at night, you might want to capture the moment! Th
     ],
     excludes: [],
     image: specialtyImage("spec-night"),
-    images: [
-      specialtyImage("spec-night-01"),
-      specialtyImage("spec-night-02")
-    ]
   },
   {
     id: "spec-nitrox",
@@ -1816,10 +1674,6 @@ Underwater photographers often dive with enriched air to maximise the number of 
       "Nitrox tanks"
     ],
     image: specialtyImage("spec-nitrox"),
-    images: [
-      specialtyImage("spec-nitrox-01"),
-      specialtyImage("spec-nitrox-02")
-    ]
   },
   {
     id: "spec-sidemount",
@@ -1874,10 +1728,6 @@ Sidemount and drift diving are perfect partners. Now that you have earned your P
     ],
     excludes: [],
     image: specialtyImage("spec-sidemount"),
-    images: [
-      specialtyImage("spec-sidemount-01"),
-      specialtyImage("spec-sidemount-02")
-    ]
   },
   {
     id: "spec-wreck",
@@ -1928,10 +1778,6 @@ Many shipwrecks are often found in deeper water. That's why the PADI Wreck Diver
       "Dive equipment"
     ],
     image: specialtyImage("spec-wreck"),
-    images: [
-      specialtyImage("spec-wreck-01"),
-      specialtyImage("spec-wreck-02")
-    ]
   }
 ];
 
@@ -1983,10 +1829,6 @@ Planowanie i wykonanie głębokiego nurkowania jest niesamowite, ale dlaczego ni
     ],
     excludes: [],
     image: specialtyImage("spec-deep"),
-    images: [
-      specialtyImage("spec-deep-01"),
-      specialtyImage("spec-deep-02")
-    ]
   },
   {
     id: "spec-night",
@@ -2031,10 +1873,6 @@ Teraz widziałeś życie morskie nocą, możesz chcieć uchwycić moment! Specja
     ],
     excludes: [],
     image: specialtyImage("spec-night"),
-    images: [
-      specialtyImage("spec-night-01"),
-      specialtyImage("spec-night-02")
-    ]
   },
   {
     id: "spec-nitrox",
@@ -2077,10 +1915,6 @@ Fotografowie podwodni często nurkują z wzbogaconym powietrzem, aby zmaksymaliz
       "Butle Nitrox"
     ],
     image: specialtyImage("spec-nitrox"),
-    images: [
-      specialtyImage("spec-nitrox-01"),
-      specialtyImage("spec-nitrox-02")
-    ]
   },
   {
     id: "spec-sidemount",
@@ -2135,10 +1969,6 @@ Sidemount i drift diving to idealni partnerzy. Teraz, gdy masz certyfikat Sidemo
     ],
     excludes: [],
     image: specialtyImage("spec-sidemount"),
-    images: [
-      specialtyImage("spec-sidemount-01"),
-      specialtyImage("spec-sidemount-02")
-    ]
   },
   {
     id: "spec-wreck",
@@ -2189,10 +2019,6 @@ Wiele wraków statków często znajduje się w głębszej wodzie. Dlatego kurs P
       "Sprzęt nurkowy"
     ],
     image: specialtyImage("spec-wreck"),
-    images: [
-      specialtyImage("spec-wreck-01"),
-      specialtyImage("spec-wreck-02")
-    ]
   }
 ];
 
@@ -2244,10 +2070,6 @@ const specialtiesRU: SpecialtyTranslation[] = [
     ],
     excludes: [],
     image: specialtyImage("spec-deep"),
-    images: [
-      specialtyImage("spec-deep-01"),
-      specialtyImage("spec-deep-02")
-    ]
   },
   {
     id: "spec-night",
@@ -2292,10 +2114,6 @@ const specialtiesRU: SpecialtyTranslation[] = [
     ],
     excludes: [],
     image: specialtyImage("spec-night"),
-    images: [
-      specialtyImage("spec-night-01"),
-      specialtyImage("spec-night-02")
-    ]
   },
   {
     id: "spec-nitrox",
@@ -2338,10 +2156,6 @@ Nitrox — это когда меняют обычный баллон с воз�
       "Баллоны Nitrox"
     ],
     image: specialtyImage("spec-nitrox"),
-    images: [
-      specialtyImage("spec-nitrox-01"),
-      specialtyImage("spec-nitrox-02")
-    ]
   },
   {
     id: "spec-sidemount",
@@ -2396,10 +2210,6 @@ Sidemount и drift дайвинг — идеальные партнёры. Те�
     ],
     excludes: [],
     image: specialtyImage("spec-sidemount"),
-    images: [
-      specialtyImage("spec-sidemount-01"),
-      specialtyImage("spec-sidemount-02")
-    ]
   },
   {
     id: "spec-wreck",
@@ -2450,10 +2260,6 @@ Sidemount и drift дайвинг — идеальные партнёры. Те�
       "Дайв-снаряжение"
     ],
     image: specialtyImage("spec-wreck"),
-    images: [
-      specialtyImage("spec-wreck-01"),
-      specialtyImage("spec-wreck-02")
-    ]
   }
 ];
 
