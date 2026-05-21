@@ -1,0 +1,53 @@
+---
+interface Props {
+  itemType: "course" | "trip";
+  itemId: string;
+  label?: string;
+}
+
+const { itemType, itemId, label = "Book Now" } = Astro.props;
+
+const baseClasses = "inline-flex items-center justify-center rounded-md font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 bg-primary text-white hover:bg-opacity-90 ring-primary px-3 py-1.5 text-sm";
+---
+
+<button type="button" class={`booking-button ${baseClasses}`} data-item-type={itemType} data-item-id={itemId}>
+  {label}
+</button>
+
+<script>
+  const buttons = document.querySelectorAll(".booking-button");
+  buttons.forEach((button) => {
+    if (button.dataset.bound) return;
+    button.dataset.bound = "true";
+
+    button.addEventListener("click", async () => {
+      const itemType = button.dataset.itemType;
+      const itemId = button.dataset.itemId;
+
+      try {
+        const language = document.documentElement.getAttribute("lang") || "en";
+        const response = await fetch("/api/bookings/reserve", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ itemType, itemId, lang: language })
+        });
+
+        if (response.status === 401) {
+          window.location.href = `/${language}/signin`;
+          return;
+        }
+
+        const data = await response.json();
+        if (!response.ok) {
+          alert(data.error || "Unable to reserve");
+          return;
+        }
+        if (data.url) {
+          window.location.href = data.url;
+        }
+      } catch (error) {
+        console.error("Unable to reserve", error);
+      }
+    });
+  });
+</script>

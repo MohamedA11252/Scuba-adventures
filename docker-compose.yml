@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "4321:4321"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=4321
+      - PUBLIC_SITE_URL=http://localhost:4321
+      - ADMIN_EMAIL=admin@scubaadventures.com
+      - ADMIN_PASSWORD=AdminPass123
+    volumes:
+      - ./local.db:/app/local.db
+      - ./public/uploads:/app/public/uploads
+    restart: unless-stopped

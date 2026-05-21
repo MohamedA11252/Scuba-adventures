@@ -1,0 +1,122 @@
+---
+import MenuIcon from '../icons/Menu.astro';
+import GlobeIcon from '../icons/Globe.astro';
+import { getLangFromPathname, switchLanguagePath } from '../../lib/i18n';
+import { getTranslations } from '../../lib/i18n';
+import { BRAND_NAME } from '../../lib/brand';
+
+const user = Astro.locals.user ?? null;
+const lang = getLangFromPathname(Astro.url.pathname);
+const t = getTranslations(lang);
+const basePath = `/${lang}`;
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+	{ href: `${basePath}/`, text: t.nav.home },
+	{ href: `${basePath}/courses`, text: t.nav.courses },
+	{ href: `${basePath}/specialties`, text: t.nav.specialties },
+	{ href: `${basePath}/contact`, text: t.nav.contact }
+];
+
+const langOptions = [
+	{ code: 'en', label: 'English' },
+	{ code: 'pl', label: 'Polski' },
+	{ code: 'ru', label: 'Русский' }
+] as const;
+
+const accountHref = user ? `${basePath}/dashboard` : `${basePath}/signin`;
+const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
+---
+
+<header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200/60">
+	<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex items-center justify-between h-20">
+			<div class="flex-shrink-0">
+				<a href={`${basePath}/`} class="text-2xl font-bold text-primary tracking-tight">{BRAND_NAME}</a>
+			</div>
+			<div class="hidden md:block">
+				<div class="ml-10 flex items-baseline space-x-1">
+					{navLinks.map((link) => (
+						<a href={link.href} class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">{link.text}</a>
+					))}
+				</div>
+			</div>
+			<div class="hidden md:flex items-center space-x-4">
+				<div class="relative" id="lang-menu-desktop">
+					<button type="button" class="text-gray-700 hover:text-primary flex items-center gap-2 text-sm font-medium" aria-haspopup="true" aria-expanded="false">
+						<GlobeIcon />
+						<span>{lang.toUpperCase()}</span>
+					</button>
+					<div class="absolute right-0 mt-2 w-36 rounded-md shadow-premium bg-white border border-gray-200 hidden" data-lang-panel>
+						{langOptions.map((opt) => (
+							<a href={switchLanguagePath(pathname, opt.code)} class="block px-4 py-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50">{opt.label}</a>
+						))}
+					</div>
+				</div>
+				<a href={accountHref} class="bg-secondary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition-colors">{accountLabel}</a>
+			</div>
+			<div class="-mr-2 flex md:hidden">
+				<button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary focus:outline-none" aria-label="Open menu">
+					<MenuIcon />
+				</button>
+			</div>
+		</div>
+	</nav>
+
+	<div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
+		<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+			{navLinks.map((link) => (
+				<a href={link.href} class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">{link.text}</a>
+			))}
+			<div class="border-t border-gray-200 my-2"></div>
+			<a href={accountHref} class="bg-secondary text-white block text-center w-full px-4 py-2 rounded-md text-sm font-medium">{accountLabel}</a>
+			<div class="pt-4 border-t border-gray-200">
+				<p class="text-xs text-gray-500 uppercase tracking-wide mb-2 px-3">{t.nav.language ?? 'Language'}</p>
+				{langOptions.map((opt) => (
+					<a href={switchLanguagePath(pathname, opt.code)} class="text-gray-700 hover:text-primary block px-3 py-2">{opt.label}</a>
+				))}
+			</div>
+		</div>
+	</div>
+</header>
+
+<script>
+	const CLOSE_DELAY_MS = 400;
+
+	const setupLangMenu = (rootId: string) => {
+		const root = document.getElementById(rootId);
+		if (!root) return;
+		const panel = root.querySelector('[data-lang-panel]');
+		const button = root.querySelector('button');
+		if (!panel || !button) return;
+
+		let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+		const open = () => {
+			if (closeTimer) clearTimeout(closeTimer);
+			panel.classList.remove('hidden');
+			button.setAttribute('aria-expanded', 'true');
+		};
+
+		const scheduleClose = () => {
+			if (closeTimer) clearTimeout(closeTimer);
+			closeTimer = setTimeout(() => {
+				panel.classList.add('hidden');
+				button.setAttribute('aria-expanded', 'false');
+			}, CLOSE_DELAY_MS);
+		};
+
+		root.addEventListener('mouseenter', open);
+		root.addEventListener('mouseleave', scheduleClose);
+		panel.addEventListener('mouseenter', open);
+		panel.addEventListener('mouseleave', scheduleClose);
+	};
+
+	setupLangMenu('lang-menu-desktop');
+
+	const mobileMenuButton = document.getElementById('mobile-menu-button');
+	const mobileMenu = document.getElementById('mobile-menu');
+	mobileMenuButton?.addEventListener('click', () => {
+		mobileMenu?.classList.toggle('hidden');
+	});
+</script>

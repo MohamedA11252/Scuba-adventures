@@ -1,0 +1,49 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import { lucia } from '../../lib/auth';
+import { getLangFromPathname } from '../../lib/i18n';
+
+const basePath = `/${getLangFromPathname(Astro.url.pathname)}`;
+
+const { user, session } = await lucia.validateSession(Astro.cookies.get(lucia.sessionCookieName)?.value ?? "");
+
+if (!session) {
+    return Astro.redirect(`${basePath}/signin`);
+}
+---
+
+<MainLayout title="Dashboard" description="Your Scuba Academy dashboard.">
+    <section class="pt-28 pb-16 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+                <div>
+                    <h1 class="text-4xl font-bold">Welcome, {user.email}</h1>
+                    <p class="text-text-secondary mt-2">Review your bookings, payments, and certifications.</p>
+                </div>
+                <form method="POST" action="/api/logout">
+                    <button type="submit" class="text-red-500 hover:underline">Logout</button>
+                </form>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <Card>
+                    <h2 class="text-2xl font-semibold mb-3">Upcoming Trips</h2>
+                    <p class="text-text-secondary">Azure Atolls - Maldives (June 20, 2026)</p>
+                </Card>
+                <Card>
+                    <h2 class="text-2xl font-semibold mb-3">Purchased Courses</h2>
+                    <p class="text-text-secondary">Open Water Diver</p>
+                </Card>
+                <Card>
+                    <h2 class="text-2xl font-semibold mb-3">Payment History</h2>
+                    <p class="text-text-secondary">$450 - Confirmed</p>
+                </Card>
+                <Card>
+                    <h2 class="text-2xl font-semibold mb-3">Certifications</h2>
+                    <p class="text-text-secondary">PADI Open Water (2025)</p>
+                </Card>
+            </div>
+        </div>
+    </section>
+</MainLayout>

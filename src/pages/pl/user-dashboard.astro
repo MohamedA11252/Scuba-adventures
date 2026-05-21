@@ -1,0 +1,40 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import { lucia } from '../../lib/auth';
+import { getLangFromPathname } from '../../lib/i18n';
+
+const basePath = `/${getLangFromPathname(Astro.url.pathname)}`;
+
+const { session } = await lucia.validateSession(Astro.cookies.get(lucia.sessionCookieName)?.value ?? "");
+
+if (!session) {
+  return Astro.redirect(`${basePath}/signin`);
+}
+---
+
+<MainLayout title="User Dashboard" description="Your bookings and profile.">
+  <section class="pt-28 pb-16 bg-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold mb-8">Your Dashboard</h1>
+      <div class="grid md:grid-cols-2 gap-8">
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">Upcoming Trips</h2>
+          <p class="text-text-secondary">Azure Atolls - Maldives (June 20, 2026)</p>
+        </Card>
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">Purchased Courses</h2>
+          <p class="text-text-secondary">Open Water Diver</p>
+        </Card>
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">Payment History</h2>
+          <p class="text-text-secondary">$450 - Confirmed</p>
+        </Card>
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">Certifications</h2>
+          <p class="text-text-secondary">PADI Open Water (2025)</p>
+        </Card>
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,51 @@
+---
+import Card from '../ui/Card.astro';
+import BookingButton from '../ui/BookingButton.astro';
+
+interface Props {
+  course: {
+    id: string;
+    title: string;
+    shortDescription: string;
+    difficulty: string;
+    price: number;
+    durationDays: number;
+    seats: number;
+    certification: string;
+    instructor: string;
+    nextStart: string;
+    image: string;
+  };
+  bookLabel?: string;
+  dateLabel?: string;
+  lang?: string;
+}
+
+const { course, bookLabel = "Book Now", dateLabel = "Select Date", lang = "en" } = Astro.props;
+---
+
+<Card className="overflow-hidden">
+  <a href={`/${lang}/courses/${course.id}`} class="block">
+    <div class="h-48 w-full">
+      <img src={course.image} alt={course.title} class="h-full w-full object-cover" loading="lazy" />
+    </div>
+  </a>
+  <div class="mt-6 space-y-3">
+    <div class="flex items-center justify-between">
+      <h3 class="text-xl font-semibold">{course.title}</h3>
+      <span class="text-sm text-text-secondary">{course.certification}</span>
+    </div>
+    <p class="text-text-secondary">{course.shortDescription}</p>
+    <div class="grid grid-cols-2 gap-4 text-sm text-text-secondary">
+      <span>Difficulty: {course.difficulty}</span>
+      <span>Duration: {course.durationDays} day{course.durationDays > 1 ? 's' : ''}</span>
+      <span>Seats: {course.seats}</span>
+      <span>Instructor: {course.instructor}</span>
+      <span>Next Start: {course.nextStart}</span>
+    </div>
+    <div class="flex items-center justify-between pt-4">
+      <span class="text-xl font-semibold text-primary">€{course.price}</span>
+      <BookingButton itemType="course" itemId={course.id} label={bookLabel} />
+    </div>
+  </div>
+</Card>

@@ -1,0 +1,307 @@
+---
+import Card from '../ui/Card.astro';
+import type { getTranslations } from '../../lib/i18n';
+
+interface Props {
+	t: ReturnType<typeof getTranslations>;
+	data: ReturnType<typeof import('../../services/dashboard.service').dashboardService.getAdminDashboard>;
+}
+
+const { t, data } = Astro.props;
+const instructorsJson = JSON.stringify(data.instructors);
+---
+
+<div class="space-y-10" id="admin-catalog">
+	<p id="admin-toast" class="hidden text-sm px-4 py-2 rounded-md bg-primary/10 text-primary"></p>
+
+	<!-- Courses -->
+	<Card>
+		<div class="flex items-center justify-between mb-4">
+			<h2 class="text-2xl font-semibold">{t.admin.courses}</h2>
+			<details class="text-sm">
+				<summary class="cursor-pointer text-secondary font-medium">{t.admin.addCourse}</summary>
+				<form class="catalog-form mt-4 grid md:grid-cols-2 gap-3" data-resource="courses" data-method="POST">
+					<input name="title" placeholder={t.admin.fields.title} required class="admin-input" />
+					<input name="price" type="number" step="0.01" placeholder={t.admin.fields.price} required class="admin-input" />
+					<input name="duration" type="number" placeholder={t.admin.fields.duration} required class="admin-input" />
+					<input name="seats" type="number" placeholder={t.admin.fields.seats} required class="admin-input" />
+					<input name="difficulty" placeholder={t.admin.fields.difficulty} required class="admin-input" />
+					<select name="certification" class="admin-input"><option value="PADI">PADI</option><option value="SSI">SSI</option></select>
+					<input name="nextStart" type="date" class="admin-input" />
+					<select name="instructorId" class="admin-input" id="course-instructor-select"></select>
+					<input name="imageUrl" placeholder={t.admin.fields.imageUrl} class="admin-input md:col-span-2" />
+					<textarea name="description" placeholder={t.admin.fields.description} required class="admin-input md:col-span-2" rows="2"></textarea>
+					<div class="md:col-span-2 flex gap-2 items-center">
+						<input type="file" accept="image/*" class="upload-input text-sm" />
+						<button type="button" class="upload-btn text-sm text-secondary hover:underline">{t.admin.uploadImage}</button>
+					</div>
+					<button type="submit" class="admin-btn md:col-span-2">{t.admin.create}</button>
+				</form>
+			</details>
+		</div>
+		<div class="overflow-x-auto">
+			<table class="min-w-full text-left text-sm">
+				<thead><tr class="text-text-secondary"><th class="py-2">{t.admin.fields.title}</th><th class="py-2">{t.admin.fields.seats}</th><th class="py-2">{t.admin.fields.price}</th><th class="py-2"></th></tr></thead>
+				<tbody>
+					{data.courses.map((course) => (
+						<tr class="border-t admin-row" data-search={course.title.toLowerCase()}>
+							<td class="py-3 pr-4">
+								<p class="font-medium">{course.title}</p>
+								<p class="text-xs text-text-secondary truncate max-w-[200px]">{course.id}</p>
+							</td>
+							<td class="py-3"><input type="number" min="0" value={course.seats} class="seat-input w-16 border rounded px-2 py-1" data-item-type="course" data-item-id={course.id} /></td>
+							<td class="py-3">${course.price}</td>
+							<td class="py-3 space-x-2 whitespace-nowrap">
+								<button type="button" class="save-seats text-secondary text-xs hover:underline" data-item-type="course" data-item-id={course.id}>{t.admin.save}</button>
+								<button type="button" class="edit-course text-secondary text-xs hover:underline" data-course={JSON.stringify(course)}>{t.admin.edit}</button>
+								<button type="button" class="delete-item text-red-500 text-xs hover:underline" data-resource="courses" data-id={course.id}>{t.admin.delete}</button>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	</Card>
+
+	<!-- Trips -->
+	<Card>
+		<div class="flex items-center justify-between mb-4">
+			<h2 class="text-2xl font-semibold">{t.admin.trips}</h2>
+			<details class="text-sm">
+				<summary class="cursor-pointer text-secondary font-medium">{t.admin.addTrip}</summary>
+				<form class="catalog-form mt-4 grid md:grid-cols-2 gap-3" data-resource="trips" data-method="POST">
+					<input name="title" placeholder={t.admin.fields.title} required class="admin-input" />
+					<input name="destination" placeholder={t.admin.fields.destination} required class="admin-input" />
+					<input name="price" type="number" step="0.01" required class="admin-input" />
+					<input name="duration" type="number" required class="admin-input" />
+					<input name="seats" type="number" required class="admin-input" />
+					<input name="departureDate" type="date" required class="admin-input" />
+					<input name="imageUrl" placeholder={t.admin.fields.imageUrl} class="admin-input md:col-span-2" />
+					<textarea name="description" required class="admin-input md:col-span-2" rows="2"></textarea>
+					<div class="md:col-span-2 flex gap-2 items-center">
+						<input type="file" accept="image/*" class="upload-input text-sm" />
+						<button type="button" class="upload-btn text-sm text-secondary hover:underline">{t.admin.uploadImage}</button>
+					</div>
+					<button type="submit" class="admin-btn md:col-span-2">{t.admin.create}</button>
+				</form>
+			</details>
+		</div>
+		<div class="overflow-x-auto">
+			<table class="min-w-full text-left text-sm">
+				<thead><tr class="text-text-secondary"><th class="py-2">{t.admin.fields.destination}</th><th class="py-2">{t.admin.fields.seats}</th><th class="py-2">{t.admin.fields.price}</th><th class="py-2"></th></tr></thead>
+				<tbody>
+					{data.trips.map((trip) => (
+						<tr class="border-t admin-row" data-search={`${trip.destination} ${trip.title}`.toLowerCase()}>
+							<td class="py-3">{trip.destination}</td>
+							<td class="py-3"><input type="number" min="0" value={trip.seats} class="seat-input w-16 border rounded px-2 py-1" /></td>
+							<td class="py-3">${trip.price}</td>
+							<td class="py-3 space-x-2">
+								<button type="button" class="save-seats text-secondary text-xs hover:underline" data-item-type="trip" data-item-id={trip.id}>{t.admin.save}</button>
+								<button type="button" class="delete-item text-red-500 text-xs hover:underline" data-resource="trips" data-id={trip.id}>{t.admin.delete}</button>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	</Card>
+
+	<!-- Specialties -->
+	<Card>
+		<div class="flex items-center justify-between mb-4">
+			<h2 class="text-2xl font-semibold">{t.admin.specialties}</h2>
+			<details class="text-sm">
+				<summary class="cursor-pointer text-secondary font-medium">{t.admin.addSpecialty}</summary>
+				<form class="catalog-form mt-4 grid gap-3" data-resource="specialties" data-method="POST">
+					<input name="title" required class="admin-input" placeholder={t.admin.fields.title} />
+					<textarea name="description" required class="admin-input" rows="2" placeholder={t.admin.fields.description}></textarea>
+					<button type="submit" class="admin-btn">{t.admin.create}</button>
+				</form>
+			</details>
+		</div>
+		<ul class="space-y-2 text-sm">
+			{data.specialties.map((s) => (
+				<li class="flex justify-between border-b pb-2 admin-row" data-search={s.title.toLowerCase()}>
+					<span>{s.title}</span>
+					<button type="button" class="delete-item text-red-500 text-xs hover:underline" data-resource="specialties" data-id={s.id}>{t.admin.delete}</button>
+				</li>
+			))}
+		</ul>
+	</Card>
+
+	<!-- Gallery -->
+	<Card>
+		<div class="flex items-center justify-between mb-4">
+			<h2 class="text-2xl font-semibold">{t.admin.gallery}</h2>
+			<details class="text-sm">
+				<summary class="cursor-pointer text-secondary font-medium">{t.admin.addGallery}</summary>
+				<form class="catalog-form mt-4 grid gap-3" data-resource="gallery" data-method="POST">
+					<input name="title" class="admin-input" placeholder={t.admin.fields.caption} />
+					<input name="imageUrl" required class="admin-input" placeholder={t.admin.fields.imageUrl} />
+					<div class="flex gap-2 items-center">
+						<input type="file" accept="image/*" class="upload-input text-sm" />
+						<button type="button" class="upload-btn text-sm text-secondary hover:underline">{t.admin.uploadImage}</button>
+					</div>
+					<button type="submit" class="admin-btn">{t.admin.create}</button>
+				</form>
+			</details>
+		</div>
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+			{data.gallery.map((item) => (
+				<div class="admin-row relative rounded-lg overflow-hidden shadow-premium" data-search={item.title?.toLowerCase() ?? ""}>
+					<img src={item.image_url} alt={item.title ?? "Gallery"} class="w-full h-32 object-cover" />
+					<button type="button" class="delete-item absolute top-2 right-2 bg-white/90 text-red-600 text-xs px-2 py-1 rounded" data-resource="gallery" data-id={item.id}>{t.admin.delete}</button>
+				</div>
+			))}
+		</div>
+	</Card>
+</div>
+
+<!-- Edit course modal -->
+<dialog id="edit-course-dialog" class="rounded-xl p-6 max-w-lg w-full backdrop:bg-black/40">
+	<form id="edit-course-form" class="grid gap-3">
+		<h3 class="text-xl font-semibold">{t.admin.editCourse}</h3>
+		<input type="hidden" name="id" />
+		<input name="title" required class="admin-input" />
+		<input name="price" type="number" step="0.01" required class="admin-input" />
+		<input name="seats" type="number" required class="admin-input" />
+		<input name="imageUrl" class="admin-input" />
+		<button type="submit" class="admin-btn">{t.admin.save}</button>
+		<button type="button" id="close-edit-course" class="text-sm text-text-secondary">{t.admin.cancel}</button>
+	</form>
+</dialog>
+
+<script define:vars={{ instructorsJson, savedLabel: t.admin.saved, saveLabel: t.admin.save }}>
+	const instructors = JSON.parse(instructorsJson);
+	const toast = document.getElementById("admin-toast");
+	const showToast = (msg, ok = true) => {
+		if (!toast) return;
+		toast.textContent = msg;
+		toast.classList.remove("hidden", "bg-red-100", "text-red-700", "bg-primary/10", "text-primary");
+		toast.classList.add(ok ? "bg-primary/10" : "bg-red-100", ok ? "text-primary" : "text-red-700");
+		setTimeout(() => toast.classList.add("hidden"), 3000);
+	};
+
+	document.querySelectorAll("#course-instructor-select").forEach((sel) => {
+		instructors.forEach((i) => {
+			const opt = document.createElement("option");
+			opt.value = i.id;
+			opt.textContent = i.name;
+			sel.appendChild(opt);
+		});
+	});
+
+	const formToObject = (form) => {
+		const fd = new FormData(form);
+		const obj = Object.fromEntries(fd.entries());
+		if (obj.price) obj.price = Number(obj.price);
+		if (obj.duration) obj.duration = Number(obj.duration);
+		if (obj.seats) obj.seats = Number(obj.seats);
+		if (obj.instructorId === "") delete obj.instructorId;
+		return obj;
+	};
+
+	document.querySelectorAll(".upload-btn").forEach((btn) => {
+		btn.addEventListener("click", async () => {
+			const form = btn.closest("form") || btn.closest("details")?.querySelector("form");
+			const fileInput = form?.querySelector(".upload-input");
+			const urlInput = form?.querySelector('[name="imageUrl"]');
+			const file = fileInput?.files?.[0];
+			if (!file) return showToast("Select a file first", false);
+
+			const body = new FormData();
+			body.append("file", file);
+			const res = await fetch("/api/admin/upload", { method: "POST", body });
+			const data = await res.json();
+			if (res.ok && urlInput) {
+				urlInput.value = data.url;
+				showToast("Image uploaded");
+			} else {
+				showToast(data.error || "Upload failed", false);
+			}
+		});
+	});
+
+	document.querySelectorAll(".catalog-form").forEach((form) => {
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault();
+			const resource = form.dataset.resource;
+			const payload = formToObject(form);
+			const res = await fetch(`/api/admin/${resource}`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload)
+			});
+			const data = await res.json();
+			if (res.ok) {
+				showToast("Created");
+				location.reload();
+			} else {
+				showToast(data.error || "Error", false);
+			}
+		});
+	});
+
+	document.querySelectorAll(".delete-item").forEach((btn) => {
+		btn.addEventListener("click", async () => {
+			if (!confirm("Delete this item?")) return;
+			const res = await fetch(`/api/admin/${btn.dataset.resource}/${btn.dataset.id}`, { method: "DELETE" });
+			if (res.ok) location.reload();
+			else showToast((await res.json()).error, false);
+		});
+	});
+
+	document.querySelectorAll(".save-seats").forEach((button) => {
+		button.addEventListener("click", async () => {
+			const row = button.closest("tr");
+			const itemType = button.dataset.itemType;
+			const itemId = button.dataset.itemId;
+			const seats = Number(row?.querySelector(".seat-input")?.value ?? 0);
+			const res = await fetch("/api/admin/seats", {
+				method: "PATCH",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ itemType, itemId, seats })
+			});
+			if (res.ok) {
+				button.textContent = savedLabel;
+				setTimeout(() => { button.textContent = saveLabel; }, 1500);
+			}
+		});
+	});
+
+	const editDialog = document.getElementById("edit-course-dialog");
+	const editForm = document.getElementById("edit-course-form");
+	document.querySelectorAll(".edit-course").forEach((btn) => {
+		btn.addEventListener("click", () => {
+			const course = JSON.parse(btn.dataset.course);
+			editForm.id.value = course.id;
+			editForm.title.value = course.title;
+			editForm.price.value = course.price;
+			editForm.seats.value = course.seats;
+			editForm.imageUrl.value = course.image_url || "";
+			editDialog?.showModal();
+		});
+	});
+	document.getElementById("close-edit-course")?.addEventListener("click", () => editDialog?.close());
+	editForm?.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const id = editForm.id.value;
+		const payload = formToObject(editForm);
+		const res = await fetch(`/api/admin/courses/${id}`, {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(payload)
+		});
+		if (res.ok) location.reload();
+		else showToast((await res.json()).error, false);
+	});
+</script>
+
+<style>
+	.admin-input {
+		@apply w-full px-3 py-2 border border-gray-200 rounded-md text-sm focus:ring-secondary focus:border-secondary;
+	}
+	.admin-btn {
+		@apply bg-secondary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90;
+	}
+</style>

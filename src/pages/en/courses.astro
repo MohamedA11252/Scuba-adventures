@@ -1,0 +1,36 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CourseCard from '../../components/features/CourseCard.astro';
+import { courses } from '../../lib/mock-data';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: courses.map((course, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: course.title,
+    description: course.shortDescription
+  }))
+};
+---
+
+<MainLayout title="Courses" description="Explore scuba diving courses.">
+  <section class="pt-28 pb-16 bg-background" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold">Courses</h1>
+        <p class="text-lg text-text-secondary mt-3">Premium certifications guided by world-class instructors.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {courses.map(course => (
+          <CourseCard course={course} lang="en" />
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script type="application/ld+json">
+  {JSON.stringify(jsonLd)}
+</script>

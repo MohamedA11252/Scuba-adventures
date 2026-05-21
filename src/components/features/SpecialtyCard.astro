@@ -1,0 +1,43 @@
+---
+import Card from '../ui/Card.astro';
+
+interface Props {
+  specialty: {
+    id: string;
+    title: string;
+    shortDescription: string;
+    difficulty: string;
+    price: number;
+    durationDays: number;
+    certification: string;
+    equipment: string;
+    image: string;
+  };
+  lang?: string;
+}
+
+const { specialty, lang = "en" } = Astro.props;
+---
+
+<Card className="overflow-hidden">
+  <a href={`/${lang}/specialties/${specialty.id}`} class="block">
+    <div class="h-48 w-full">
+      <img src={specialty.image} alt={specialty.title} class="h-full w-full object-cover" loading="lazy" />
+    </div>
+  </a>
+  <div class="mt-6 space-y-3">
+    <div class="flex items-center justify-between">
+      <h3 class="text-xl font-semibold">{specialty.title}</h3>
+      <span class="text-sm text-text-secondary">{specialty.certification}</span>
+    </div>
+    <p class="text-text-secondary">{specialty.shortDescription}</p>
+    <div class="grid grid-cols-2 gap-4 text-sm text-text-secondary">
+      <span>Difficulty: {specialty.difficulty}</span>
+      <span>Duration: {specialty.durationDays} day{specialty.durationDays > 1 ? 's' : ''}</span>
+      <span>Equipment: {specialty.equipment}</span>
+    </div>
+    <div class="flex items-center justify-between pt-4">
+      <span class="text-xl font-semibold text-primary">€{specialty.price}</span>
+    </div>
+  </div>
+</Card>

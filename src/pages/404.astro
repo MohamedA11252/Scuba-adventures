@@ -1,0 +1,19 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { getLangFromPathname } from '../lib/i18n';
+
+const basePath = `/${getLangFromPathname(Astro.url.pathname)}`;
+---
+
+<MainLayout title="Page Not Found" description="Page not found.">
+  <section class="pt-28 pb-24 bg-background">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-5xl font-bold">404</h1>
+      <p class="text-lg text-text-secondary mt-4">The page you're looking for has drifted away.</p>
+      <div class="mt-8">
+        <Button href={`${basePath}/`}>Return Home</Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

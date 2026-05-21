@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import PageAnimations from '../components/animations/PageAnimations.astro';
+import { getLangFromPathname } from '../lib/i18n';
+import { SCUBA_IMAGES } from '../lib/scuba-images';
+
+interface Props {
+	title: string;
+	description: string;
+	lang?: string;
+}
+
+const { title, description, lang } = Astro.props;
+const resolvedLang = lang ?? getLangFromPathname(Astro.url.pathname);
+---
+
+<!DOCTYPE html>
+<html lang={resolvedLang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url.toString()} />
+		<meta property="og:image" content={new URL(SCUBA_IMAGES.og, Astro.site ?? Astro.url).toString()} />
+		<link rel="canonical" href={Astro.url.toString()} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen flex flex-col">
+		<Navbar />
+		<main class="flex-grow">
+			<slot />
+		</main>
+		<Footer />
+		<PageAnimations />
+	</body>
+</html>

@@ -1,0 +1,21 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import SpecialtyCard from '../../components/features/SpecialtyCard.astro';
+import { specialties } from '../../lib/mock-data';
+---
+
+<MainLayout title="Specialties" description="Explore our scuba diving specialties.">
+  <section class="pt-28 pb-16 bg-background" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold">Specialties</h1>
+        <p class="text-lg text-text-secondary mt-3">Focused training for divers seeking mastery.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {specialties.map(specialty => (
+          <SpecialtyCard specialty={specialty} lang="en" />
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>

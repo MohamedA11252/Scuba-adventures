@@ -1,0 +1,29 @@
+{
+  "name": "scuba-academy",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "seed": "node src/db/seed.js"
+  },
+  "dependencies": {
+    "@lucia-auth/adapter-sqlite": "^3.0.2",
+    "astro": "^6.3.6",
+    "better-sqlite3": "^11.5.0",
+    "gsap": "^3.12.5",
+    "lucia": "^3.2.2",
+    "oslo": "^1.2.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@astrojs/node": "^10.0.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "tailwindcss": "^3.4.19"
+  }
+}

@@ -1,0 +1,80 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { courses } from '../../../lib/mock-data';
+import { getLangFromPathname, getTranslations } from '../../../lib/i18n';
+
+const lang = getLangFromPathname(Astro.url.pathname);
+const t = getTranslations(lang);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: courses.map((course, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: course.title,
+    description: course.shortDescription
+  }))
+};
+---
+
+<MainLayout title="Courses" description="Explore our PADI certified diving courses.">
+  <section class="pt-28 pb-16 bg-background" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold">Diving Courses</h1>
+        <p class="text-lg text-text-secondary mt-3">Learn from certified PADI instructors and explore the underwater world.</p>
+      </div>
+      
+      {courses.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {courses.map(course => (
+            <a href={`/en/courses/${course.id}`} class="group">
+              <div class="bg-surface border border-gray-200/50 rounded-xl overflow-hidden shadow-premium hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="relative h-64 overflow-hidden bg-gray-200">
+                  <img src={course.image} alt={course.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                </div>
+                <div class="p-6">
+                  <h3 class="text-2xl font-bold text-primary mb-2">{course.title}</h3>
+                  <p class="text-text-secondary mb-4 line-clamp-3">{course.shortDescription}</p>
+                  
+                  <div class="space-y-2 mb-6">
+                    {course.price && (
+                      <div class="flex items-center justify-between">
+                        <span class="text-2xl font-bold text-primary">${course.price}</span>
+                      </div>
+                    )}
+                    {course.durationDays && (
+                      <div class="flex items-center gap-2 text-sm text-text-secondary">
+                        <span class="font-semibold">Duration:</span>
+                        <span>{course.durationDays} day{course.durationDays > 1 ? 's' : ''}</span>
+                      </div>
+                    )}
+                    {course.requirements && (
+                      <div class="flex items-center gap-2 text-sm text-text-secondary">
+                        <span class="font-semibold">Requirements:</span>
+                        <span>{course.requirements}</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <button class="w-full bg-secondary text-white py-2 rounded-md font-semibold hover:bg-opacity-90 transition-colors">
+                    Learn More
+                  </button>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12">
+          <p class="text-text-secondary text-lg">No courses available at the moment. Check back soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</MainLayout>
+
+<script type="application/ld+json">
+  {JSON.stringify(jsonLd)}
+</script>

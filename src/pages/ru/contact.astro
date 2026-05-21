@@ -1,0 +1,74 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Input from '../../components/ui/Input.astro';
+import Button from '../../components/ui/Button.astro';
+import { getLangFromPathname, getTranslations } from '../../lib/i18n';
+import FacebookIcon from '../../components/icons/Facebook.astro';
+import InstagramIcon from '../../components/icons/Instagram.astro';
+import WhatsappIcon from '../../components/icons/Whatsapp.astro';
+import TikTokIcon from '../../components/icons/TikTok.astro';
+
+const lang = getLangFromPathname(Astro.url.pathname);
+const t = getTranslations(lang);
+---
+
+<MainLayout title={t.contact.title} description={t.contact.description}>
+  <section class="pt-28 pb-16 bg-background" data-animate="fade-up">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold">{t.contact.heading}</h1>
+        <p class="text-lg text-text-secondary mt-3">{t.contact.subtitle}</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">{t.contact.speakTitle}</h2>
+          <p class="text-text-secondary">WhatsApp: +20 114 596 4916</p>
+          <p class="text-text-secondary">WhatsApp: +20 100 288 7702</p>
+          <p class="text-text-secondary mt-4">{t.contact.location}</p>
+        </Card>
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">{t.contact.sendTitle}</h2>
+          <form class="space-y-4">
+            <div>
+              <label for="name" class="text-sm text-text-secondary">{t.contact.name}</label>
+              <Input id="name" name="name" placeholder={t.contact.name} />
+            </div>
+            <div>
+              <label for="email" class="text-sm text-text-secondary">{t.auth.email}</label>
+              <Input id="email" name="email" type="email" placeholder="you@example.com" />
+            </div>
+            <div>
+              <label for="message" class="text-sm text-text-secondary">{t.contact.message}</label>
+              <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-secondary focus:border-secondary transition-colors"></textarea>
+            </div>
+            <Button>{t.contact.send}</Button>
+          </form>
+        </Card>
+      </div>
+
+      <div class="bg-surface border border-gray-200/50 rounded-xl p-8 max-w-2xl mx-auto">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Connect with us on social media</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <a href="https://www.facebook.com/share/1CueXGiqDx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+            <span class="text-primary hover:text-secondary transition-colors"><FacebookIcon /></span>
+            <span class="text-sm font-semibold text-text-secondary">Facebook</span>
+          </a>
+          <a href="https://www.instagram.com/scubaadventures97?igsh=dDZqbzZ3YWk5ZzF6" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+            <span class="text-primary hover:text-secondary transition-colors"><InstagramIcon /></span>
+            <span class="text-sm font-semibold text-text-secondary">Instagram</span>
+          </a>
+          <a href="https://www.tiktok.com/@scuba.adventures3" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+            <span class="text-primary hover:text-secondary transition-colors"><TikTokIcon /></span>
+            <span class="text-sm font-semibold text-text-secondary">TikTok</span>
+          </a>
+          <a href="https://wa.me/+01145964916" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+            <span class="text-primary hover:text-secondary transition-colors"><WhatsappIcon /></span>
+            <span class="text-sm font-semibold text-text-secondary">WhatsApp</span>
+          </a>
+        </div>
+        <p class="text-sm text-text-secondary text-center mt-6">WhatsApp Numbers: +01145964916 | +01002887702</p>
+      </div>
+    </div>
+  </section>
+</MainLayout>

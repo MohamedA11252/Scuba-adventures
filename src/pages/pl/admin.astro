@@ -1,0 +1,134 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/ui/Card.astro';
+---
+
+<MainLayout title="Admin Dashboard" description="Admin management panel.">
+  <section class="pt-28 pb-16 bg-background" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-10">
+        <div>
+          <h1 class="text-4xl font-bold">Admin Dashboard</h1>
+          <p class="text-text-secondary mt-2">Manage courses, trips, bookings, and users.</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <Card>
+          <p class="text-text-secondary">Total Bookings</p>
+          <p class="text-3xl font-bold mt-2">128</p>
+        </Card>
+        <Card>
+          <p class="text-text-secondary">Active Courses</p>
+          <p class="text-3xl font-bold mt-2">12</p>
+        </Card>
+        <Card>
+          <p class="text-text-secondary">Revenue (Mock)</p>
+          <p class="text-3xl font-bold mt-2">$48,200</p>
+        </Card>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <Card>
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-2xl font-semibold">Courses</h2>
+            <button class="text-sm text-secondary hover:underline" type="button">Add Course</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-left">
+              <thead>
+                <tr class="text-text-secondary text-sm">
+                  <th class="py-2">Title</th>
+                  <th class="py-2">Seats</th>
+                  <th class="py-2">Price</th>
+                  <th class="py-2">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr class="border-t">
+                  <td class="py-3">Open Water Diver</td>
+                  <td class="py-3">8</td>
+                  <td class="py-3">$450</td>
+                  <td class="py-3">Active</td>
+                </tr>
+                <tr class="border-t">
+                  <td class="py-3">Rescue Diver</td>
+                  <td class="py-3">5</td>
+                  <td class="py-3">$780</td>
+                  <td class="py-3">Active</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+        <Card>
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-2xl font-semibold">Trips</h2>
+            <button class="text-sm text-secondary hover:underline" type="button">Add Trip</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-left">
+              <thead>
+                <tr class="text-text-secondary text-sm">
+                  <th class="py-2">Destination</th>
+                  <th class="py-2">Seats</th>
+                  <th class="py-2">Departure</th>
+                  <th class="py-2">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr class="border-t">
+                  <td class="py-3">Maldives</td>
+                  <td class="py-3">10</td>
+                  <td class="py-3">Jun 20</td>
+                  <td class="py-3">Open</td>
+                </tr>
+                <tr class="border-t">
+                  <td class="py-3">Norway</td>
+                  <td class="py-3">8</td>
+                  <td class="py-3">Jul 08</td>
+                  <td class="py-3">Open</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8 mt-8">
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">Bookings</h2>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <span>Ava Holm</span>
+              <span>Confirmed</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Luca Marin</span>
+              <span>Pending</span>
+            </div>
+          </div>
+        </Card>
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">Users</h2>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <span>42 Active</span>
+              <span>Admin: 1</span>
+            </div>
+            <div class="flex justify-between">
+              <span>New this month</span>
+              <span>8</span>
+            </div>
+          </div>
+        </Card>
+        <Card>
+          <h2 class="text-2xl font-semibold mb-4">Gallery Uploads</h2>
+          <div class="space-y-4">
+            <input type="file" class="text-sm" />
+            <button class="bg-secondary text-white px-3 py-2 rounded-md text-sm" type="button">Upload Image</button>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+</MainLayout>

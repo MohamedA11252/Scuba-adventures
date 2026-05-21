@@ -1,0 +1,93 @@
+---
+import FacebookIcon from '../icons/Facebook.astro';
+import InstagramIcon from '../icons/Instagram.astro';
+import WhatsappIcon from '../icons/Whatsapp.astro';
+import TelegramIcon from '../icons/Telegram.astro';
+import GlobeIcon from '../icons/Globe.astro';
+import { getLangFromPathname, getTranslations, switchLanguagePath } from '../../lib/i18n';
+import { BRAND_NAME, BRAND_WHATSAPP_1, BRAND_WHATSAPP_2 } from '../../lib/brand';
+
+const lang = getLangFromPathname(Astro.url.pathname);
+const t = getTranslations(lang);
+const basePath = `/${lang}`;
+const pathname = Astro.url.pathname;
+
+const footerLinks = [
+	{ href: `${basePath}/`, text: t.nav.home },
+	{ href: `${basePath}/courses`, text: t.nav.courses },
+	{ href: `${basePath}/specialties`, text: t.nav.specialties },
+	{ href: `${basePath}/contact`, text: t.nav.contact }
+];
+---
+
+<footer class="bg-surface border-t border-gray-200/50">
+	<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+		<div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+			<div class="space-y-4">
+				<h3 class="text-sm font-semibold text-text-secondary tracking-wider uppercase">{t.footer?.navigation ?? 'Navigation'}</h3>
+				<ul class="space-y-2">
+					{footerLinks.map((link) => (
+						<li><a href={link.href} class="text-base text-text-secondary hover:text-primary transition-colors">{link.text}</a></li>
+					))}
+				</ul>
+			</div>
+			<div class="space-y-4">
+				<h3 class="text-sm font-semibold text-text-secondary tracking-wider uppercase">{t.footer?.contact ?? 'Contact'}</h3>
+				<ul class="space-y-2">
+					<li><a href={`https://wa.me/${BRAND_WHATSAPP_1.replace(/\s/g, '')}`} target="_blank" rel="noopener noreferrer" class="text-base text-text-secondary hover:text-primary transition-colors">WhatsApp: {BRAND_WHATSAPP_1}</a></li>
+					<li><a href={`https://wa.me/${BRAND_WHATSAPP_2.replace(/\s/g, '')}`} target="_blank" rel="noopener noreferrer" class="text-base text-text-secondary hover:text-primary transition-colors">WhatsApp: {BRAND_WHATSAPP_2}</a></li>
+				</ul>
+			</div>
+			<div class="space-y-4">
+				<h3 class="text-sm font-semibold text-text-secondary tracking-wider uppercase">{t.footer?.newsletter ?? 'Newsletter'}</h3>
+				<p class="text-base text-text-secondary">{t.footer?.newsletterText ?? 'Stay up to date with courses and dive trips.'}</p>
+			</div>
+		</div>
+		<div class="mt-12 border-t border-gray-200/50 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+			<div class="flex space-x-6 md:order-2">
+				<a href="#" class="text-text-secondary hover:text-primary"><span class="sr-only">Facebook</span><FacebookIcon /></a>
+				<a href="#" class="text-text-secondary hover:text-primary"><span class="sr-only">Instagram</span><InstagramIcon /></a>
+				<a href={`https://wa.me/${BRAND_WHATSAPP_1.replace(/\s/g, '')}`} target="_blank" rel="noopener noreferrer" class="text-text-secondary hover:text-primary"><span class="sr-only">WhatsApp</span><WhatsappIcon /></a>
+				<a href="#" class="text-text-secondary hover:text-primary"><span class="sr-only">Telegram</span><TelegramIcon /></a>
+			</div>
+			<div class="md:order-1 flex flex-col sm:flex-row items-center gap-4">
+				<p class="text-center text-base text-text-secondary">&copy; {new Date().getFullYear()} {BRAND_NAME}. {t.footer?.rights ?? 'All rights reserved.'}</p>
+				<div class="relative" id="lang-menu-footer">
+					<button type="button" class="text-text-secondary hover:text-primary flex items-center gap-1 text-sm">
+						<GlobeIcon />
+						<span>{lang.toUpperCase()}</span>
+					</button>
+					<div class="absolute bottom-full right-0 mb-2 w-36 rounded-md shadow-premium bg-white border border-gray-200 hidden" data-lang-panel>
+						<a href={switchLanguagePath(pathname, 'en')} class="block px-4 py-2 text-sm text-text-secondary hover:text-primary">English</a>
+						<a href={switchLanguagePath(pathname, 'pl')} class="block px-4 py-2 text-sm text-text-secondary hover:text-primary">Polski</a>
+						<a href={switchLanguagePath(pathname, 'ru')} class="block px-4 py-2 text-sm text-text-secondary hover:text-primary">Русский</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script>
+	const CLOSE_DELAY_MS = 400;
+	const root = document.getElementById('lang-menu-footer');
+	if (root) {
+		const panel = root.querySelector('[data-lang-panel]');
+		const button = root.querySelector('button');
+		if (panel && button) {
+			let closeTimer: ReturnType<typeof setTimeout> | null = null;
+			const open = () => {
+				if (closeTimer) clearTimeout(closeTimer);
+				panel.classList.remove('hidden');
+			};
+			const scheduleClose = () => {
+				if (closeTimer) clearTimeout(closeTimer);
+				closeTimer = setTimeout(() => panel.classList.add('hidden'), CLOSE_DELAY_MS);
+			};
+			root.addEventListener('mouseenter', open);
+			root.addEventListener('mouseleave', scheduleClose);
+			panel.addEventListener('mouseenter', open);
+			panel.addEventListener('mouseleave', scheduleClose);
+		}
+	}
+</script>

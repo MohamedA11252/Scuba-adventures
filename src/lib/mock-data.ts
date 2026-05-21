@@ -1,0 +1,883 @@
+import { SCUBA_IMAGES, courseImage, tripImage, specialtyImage } from "./scuba-images";
+
+export const courses = [
+	{
+		id: "course-bubblemaker",
+		title: "PADI Bubblemaker",
+		shortDescription: "Experience scuba diving under the direct supervision of a PADI Pro. Take your first breaths underwater in water shallower than 2 metres/6 ft. For children who are at least 8 years old.",
+		longDescription: `COURSE OVERVIEW
+
+Has your child ever dreamed of actually finding Nemo or swimming in an aquarium? Well now you can make their dreams come true. The PADI Bubblemaker experience is an easy and fun introduction to the exciting underwater world.
+
+They will learn and develop new skills and the PADI Bubblemaker program will enable them to experience a feeling of total weightlessness surrounded by hundereds of brightly coloured fish. They may even spot a turtle or a passing dolphin.
+
+What you'll learn
+
+PADI Bubblemaker takes place at one of our local shallow dive sites or in the pool if required. The maximum depth they will go to is 6 metres.
+
+The session will begin with an informative talk, covering safety aspects of Scuba and what breathing underwater for the first time will be like. Your PADI instructor will teach you the basics of diving in easy to understand steps and will also explain how to use the basic diving equipment in a safe and effective way.
+
+Our team of PADI professionals will assist your child putting on the scuba equipment and help them to adjust to the exhilarating feeling of breathing underwater before setting off on their exploration. Your PADI instructor will also show you how to handle small problems if they should occur such as clearing your mask or equalizing your ears.
+
+The Scuba Gear You Will Use
+
+All the equipment you will need is provided for a Discover Scuba Diving experience. You'll use all the basic scuba gear including a mask and snorkel, fins, a wetsuit, a buoyancy compensating jacket (BCD) that carries the scuba tank, a scuba regulator to breathe from and gauges to monitor depth and air supply. You just need to bring a towel and your swimming costume.
+
+Continue The Adventure…
+
+Now that you have taken your first scuba diving lesson, you are well on your way to becoming a certified scuba diver. Once you reach 10 years old you can participate in the PADI Discover Scuba Diving programme or why not take it further and embark on the PADI Junior Open Water Diver Course.`,
+		difficulty: "Beginner",
+		price: 130,
+		durationDays: 1,
+		seats: 10,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Included",
+		requirements: "Age of 8",
+		includes: [
+			"Transfer from and to your hotel if required.",
+			"Lunch if on the dive boat.",
+			"Hot and cold beverages if on the dive boat.",
+			"Dive guide and instructor.",
+			"Dive equipment.",
+			"2 dive experiences (pool or shallow dive site). Each dive takes about 30 minutes."
+		],
+		excludes: [],
+		image: courseImage("course-bubblemaker"),
+		images: [
+			courseImage("course-bubblemaker-01"),
+			courseImage("course-bubblemaker-02"),
+			courseImage("course-bubblemaker-03"),
+			courseImage("course-bubblemaker-04")
+		]
+	},
+	{
+		id: "course-owd",
+		title: "PADI Open Water Diver Course",
+		shortDescription: "The PADI Open Water Diver course is the world's most popular scuba course, and has introduced millions of people to the adventurous diving lifestyle.",
+		longDescription: `COURSE OVERVIEW
+
+About the Course
+
+PADI® Open Water Diver is the first scuba certification level. A highly-trained PADI Instructor will teach you how to scuba dive in a relaxed, supportive learning environment.
+
+By the end of the course, you'll have the skills and knowledge to dive at home or abroad and be an ambassador for the underwater world.
+
+PADI eLearning®
+
+PADI eLearning makes it easy to fit scuba lessons into a busy schedule. Learn about scuba diving principles and terminology whenever, wherever it's convenient for you.
+
+It's your course on your time. Study offline, or online using a computer or mobile device. Connect with your instructor whenever you have a question.
+
+eLearning time commitment: 5-10 hours
+
+With Your Instructor
+
+Practice using scuba gear in a pool (or pool-like environment) until you're comfortable. PADI training includes practice "mini dives" to help you build confidence in your new abilities before making four dives in open water.
+
+Prerequisites: Able to swim; medically fit for diving
+Total time commitment: 4-7 days
+Minimum age: 10 years or older
+Depth: expect shallow dives (12m/40ft), the maximum allowed depth is 18m/60ft`,
+		difficulty: "Beginner",
+		price: 405,
+		durationDays: 4,
+		seats: 8,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Included",
+		requirements: "Minimum age: 10",
+		includes: [
+			"PADI Dive Instructor",
+			"Dive equipment",
+			"Confined water training sessions",
+			"4 Open water training dives",
+			"Transfer from and to your hotel to the marina for the dives",
+			"Logbook",
+			"Lunch when on the boat",
+			"Hot and cold beverages when on the boat",
+			"Marine Park fees where applicable",
+			"PADI Open Water Diver materials",
+			"PADI certification fee",
+			"1 day Divecomputer"
+		],
+		excludes: [],
+		image: courseImage("course-owd"),
+		images: [
+			courseImage("course-owd-01"),
+			courseImage("course-owd-02"),
+			courseImage("course-owd-03")
+		]
+	},
+	{
+		id: "course-aowd",
+		title: "PADI Advanced Open Water Diver Course",
+		shortDescription: "The PADI Advanced Open Water Course is a natural progression once completing the PADI Open Water Course.",
+		longDescription: `COURSE OVERVIEW
+
+The PADI Advanced Open Water Course is a natural progression once completing the PADI Open Water Course. This course takes place over two days and builds on the skills you learnt during your PADI Open Water Course. It provides adventure, fun and lets you try out different types of dives, making it one of the most exciting dive courses you can do. You don't need to be an "advanced" diver to start the PADI Advanced Open Water course as it is designed so that you can go straight into it after your PADI Open Water course.
+
+Once you've completed the PADI Advanced Open Water Course, you will be a qualified PADI Advanced Open Water diver. This means you can safely dive around the world up to 30 metres and you'll have the qualification for life. This opens up a whole new world of dive sites that are out of the reach of PADI Open Water divers who are only qualified to dive to 18 metres.
+
+What you'll learn
+
+The PADI Advanced Open Water certification requires you to complete 5 PADI Adventure Dives. There are 2 required dives, PADI Deep Adventure Dive and PADI Under Water Navigation Adventure Dive. These two core dives are fundamental to your advancement as a diver. 
+
+During the Deep Adventure Dive, you learn how to plan dives to a maximum depth of 30 meters (21 meters for Junior Advanced Open Water divers). You learn how to manage the physiological effects and challenges of deeper scuba diving under the direct supervision of your PADI instructor. The Underwater Navigation Adventure Dive refines and extends your range of navigational skills, from using a variety of compass patterns to natural navigation and kick-cycles/time skills.
+
+Your other 3 Speciality Adventure dives can be chosen from the following:
+
+PADI Enriched Air Adventure Dive
+PDI Wreck Diver Adventure Dive
+PADI Peak Performance Buoyancy Adventure Dive
+PADI Underwater Photographer Adventure Dive
+PADI Search and Recovery Adventure Dive
+PADI Underwater Naturalist Adventure Dive
+PADI Diver Propulsion Vehicle Adventure Dive
+PADI Boat Diver Adventure Dive
+PADI Drift Diver Adventure Dive
+PAD Aware Fish Identification Adventure Dive
+PADI Underwater Naturalist Adventure Dive
+PADI Multi-level and Computer Adventure Dive
+
+Speak to your instructor about where your interests lie and they can advise you on what the best options for you.
+
+E-Learn before You Dive
+
+The PADI Advance Open Water course has e-learning modules available. Discounts are available for anyone who has signed up to PADI e-Learning and has associated the course to us through the online portal.
+
+The Scuba Gear You Will Use
+
+All the equipment you will need is provided for the PADI Advanced Open Water Diving course. You'll use all the basic scuba gear including a mask and snorkel, fins, a wetsuit, a buoyancy compensating jacket (BCD) that carries the scuba tank, a scuba regulator to breathe from and gauges to monitor depth and air supply. Your PADI instructor will also provide you with a dive computer and compass which are necessary for the two compulsory modules.  
+
+You will also need to complete a standard PADI Medical form which may require a doctor's signature to say you are fit to dive if you have any pertinent medical history. If you've never suffered from any of the conditions listed, you can sign it yourself.
+
+Continue The Adventure…
+
+Once you have completed the PADI Advanced Open Water Diver course we know that you'll be thirty for more! We recommend that you look at the range of PADI Specialty Diving courses available. PADI Specialties will take your abilities to the next level and focus on developing skills in specific areas such as deep diving, wreck diving or underwater photography. You may also want to consider the PADI Rescue Diver Course!`,
+		difficulty: "Intermediate",
+		price: 360,
+		durationDays: 3,
+		seats: 6,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Included",
+		requirements: "To enrol on the PADI Advanced Open Water Diver course you need to be at least 12 years old, and have earned the PADI Open Water Diver/Junior Open Water Diver certification. Children 12 to 15 years of age will earn a PADI Junior Advanced Open Water Diver certification.",
+		includes: [
+			"PADI Advanced Open Water Diver materials",
+			"PADI certification fee",
+			"PADI Dive Instructor",
+			"Dive equipment",
+			"5 Open water training dives",
+			"Transfer from and to your hotel to the marina for the dives",
+			"Lunch when on the boat",
+			"Hot and cold beverages when on the boat",
+			"Marine Park fees where applicable",
+			"Divecomputer for the Deepdive"
+		],
+		excludes: [
+			"Physical Card from PADI"
+		],
+		image: courseImage("course-aowd"),
+		images: [
+			courseImage("course-aowd-01"),
+			courseImage("course-aowd-02"),
+			courseImage("course-aowd-03"),
+			courseImage("course-aowd-04")
+		]
+	},
+	{
+		id: "course-efr",
+		title: "Emergency First Response Course (EFR)",
+		shortDescription: "First aid and CPR are important skills for anyone involved in adventure sports as you never know when you might need them. Emergency First Response is a PADI affiliate course that specialises in teaching vital lifesaving skills.",
+		longDescription: `COURSE OVERVIEW
+
+First aid and CPR are important skills for anyone involved in adventure sports as you never know when you might need them. Emergency First Response is a PADI affiliate course that specialises in teaching vital lifesaving skills.
+
+The one-day Emergency First Response course gives you the confidence to respond to medical emergencies - not just in the diving world, but in everyday life with your family, friends, neighbours and co-workers.
+
+The EFR course meets the CPR and first aid training requirements for the PADI Rescue Diver course.
+
+We also recommend that you consider taking the PADI Emergency Oxygen Provider course in conjunction with the EFR course.
+
+The course could take place in the class room at our dive centre or on the dive boat during a daily dive session. Your PADI instructor will advise you accordingly.
+
+What you'll learn
+
+Primary Care (CPR) – This teaches you the steps and techniques for handling life-threatening emergencies. You'll practice skills for aiding patients who aren't breathing, have no heartbeat, may have a spinal injury, may be in shock or who may have serious bleeding. You'll learn how to perform CPR and continue to monitor the patient, so that you provide every possible chance of survival while waiting for emergency medical services to arrive.
+
+Secondary Care (First Aid) – Because many medical conditions are not life-threatening and emergency medical services are sometimes delayed or unavailable, this section teaches you how to provide first aid that eases pain and reduces the risk of further harm. You'll learn to assess a variety of injuries and illnesses and practice bandaging and splinting through knowledge and skill development with realistic scenario practice.
+
+Continue The Adventure...
+
+If you're taking your EFR there is a good change that you are taking the steps to becoming a PADI Rescue Diver. Becoming a PADI Rescue Diver is one of the more challenging yet rewarding courses you'll take. Once qualified you will be equipped to deal with situations as and when they occur while out diving.`,
+		difficulty: "Beginner",
+		price: 170,
+		durationDays: 1,
+		seats: 12,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Not included",
+		requirements: "None",
+		includes: [
+			"Emergency First Response course materials",
+			"PADI Dive Instructor",
+			"EFR certification",
+			"Transfer from and to your hotel to the marina if taking place on the dive boat",
+			"Lunch if on the boat",
+			"Hot and cold beverages if on the boat"
+		],
+		excludes: [],
+		image: courseImage("course-efr"),
+		images: [
+			courseImage("course-efr-01"),
+			courseImage("course-efr-02"),
+			courseImage("course-efr-03")
+		]
+	},
+	{
+		id: "course-rescue",
+		title: "PADI Rescue Diver Course",
+		shortDescription: "Take a subject like accident prevention and management and turn it into fun! The PADI Rescue Diver programme does just that by introducing new topics and expanding on existing skills in an enjoyable way.",
+		longDescription: `COURSE OVERVIEW
+
+Take a subject like accident prevention and management and turn it into fun! The PADI Rescue Diver programme does just that by introducing new topics and expanding on existing skills in an enjoyable way. The end result is a diver with the knowledge and confidence to help others in distress.
+
+Being more confident in the water is what every diver desires and the PADI Rescue Diver course will help you get there. It also teaches you to be a better buddy. During the course, you learn how to spot potential problems and quickly deal with them before they become big issues. You'll be ready to rescue someone in an emergency, but you'll also have the skills and awareness to prevent problems. For many, earning a PADI Rescue Diver certification is the start of a career in diving.
+
+The PADI Rescue Diver course is designed to introduce topics and skills progressively. Your abilities are assessed throughout the course and culminate in your involvement in various accident scenarios. 
+
+What you'll learn
+
+The PADI Rescue Diver course prepares you to deal with dive emergencies, minor and major, using a variety of techniques. Through knowledge development and rescue exercises, you'll learn what to look for and how to respond as well as giving you the skills to know how to identify and adapt if your own dive isn't going quite to plan.
+
+The PADI Rescue Diver course uses a mixture of self-study and knowledge reviews, classroom sessions and practical exercises in both the pool and open water situations.
+
+Topics covered include;
+
+Dive planning and emergency procedures
+Search and Recovery techniques
+Recognising and managing stress in other divers
+Emergency management and equipment
+Rescuing panicked divers
+Rescuing unresponsive divers
+Emergency First Response & First Aid (Click here for details of the EFR course)
+
+The PADI Rescue Diver Course will test your physical and mental performance under pressure, but we are confident you will have fun doing it. 
+
+The Scuba Gear You Will Use
+
+All the equipment you will need is provided for the PADI Rescue Diver course. You'll use all the basic scuba gear including a mask and snorkel, fins, a wetsuit, a buoyancy compensating jacket (BCD) that carries the scuba tank, a scuba regulator to breathe from and gauges to monitor depth and air supply. Your PADI instructor will also provide you with a dive computer and compass which are necessary for the course.  
+
+Course Prerequisites
+
+To enrol on the PADI Rescue Diver course you need to be at least 12 years old, and have earned the PADI Advanced Open Water Diver/Junior Advanced Open Water Diver certification. Children 12 to 15 years of age will earn a PADI Junior Rescue Diver certification.
+
+You will need a completed first aid certification, including CPR, from within the past two years. Alternatively, you can take the Emergency First Responder course in conjunction with your PADI Rescue Diver Course - Click here for details of the EFR course
+
+You will also need to complete a standard PADI Medical form which may require a doctor's signature to say you are fit to dive if you have any pertinent medical history. If you've never suffered from any of the conditions listed, you can sign it yourself.
+
+Continue The Adventure…
+
+Once you have completed the PADI Rescue Diver course you are almost at the top of the recreational diving education ladder. If you have 5 PADI Specialties and 50 logged dives your PADI Instructor can certify you to become a PADI Master Scuba Diver. This is the highest certification of recreational diver before you embark on the professional educational journey to becoming a PADI Divemaster.`,
+		difficulty: "Advanced",
+		price: 350,
+		durationDays: 3,
+		seats: 6,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Included",
+		requirements: "PADI Advanced Open Water Diver certification, EFR certification within past 2 years, minimum age 12",
+		includes: [
+			"PADI Rescue Diver course materials",
+			"PADI certification fee",
+			"PADI Dive Instructor",
+			"Dive equipment",
+			"Transfer from and to your hotel to the marina for the dives",
+			"Lunch when on the boat",
+			"Hot and cold beverages when on the boat",
+			"Marine Park fees where applicable"
+		],
+		excludes: [
+			"EFR Course",
+			"PADI Emergency Oxygen Provider course",
+			"Dive Computer"
+		],
+		image: courseImage("course-rescue"),
+		images: [
+			courseImage("course-rescue-01"),
+			courseImage("course-rescue-02"),
+			courseImage("course-rescue-03")
+		]
+	},
+	{
+		id: "course-divemaster",
+		title: "PADI Divemaster Course",
+		shortDescription: "Love scuba diving? Can you picture yourself doing it for a living? Take the PADI Divemaster course and do what you love as a career.",
+		longDescription: `COURSE OVERVIEW
+
+Love scuba diving? Can you picture yourself doing it for a living? Take the PADI Divemaster course and do what you love as a career. Scuba divers look up to PADI Divemasters because they are leaders who mentor and motivate others. As a PADI Divemaster, you not only get to dive a lot but also experience the joy of seeing others have as much fun diving as you do.
+
+The PADI Divemaster course is your first level of professional training. Working closely with a PADI Instructor, you'll fine-tune your dive skills, like perfecting the effortless hover, and refine your rescue skills so you anticipate and easily solve common problems. You'll gain dive knowledge, management, and supervision abilities so you become a role model to divers everywhere.
+
+As a PADI Divemaster, you'll lead others as you supervise scuba diving activities and assist with diver training. Whether you want to work at a faraway dive destination or close to home at a local dive shop, the adventure of a lifetime awaits you. PADI Divemasters are respected dive professionals who are aligned with the largest and most respected dive organisation in the world – PADI.
+
+What you'll learn
+
+During the PADI Divemaster program, you learn dive leadership skills through both classroom and independent study. You complete water skills and stamina exercises. There are also training exercises that stretch your ability to organise and solve problems as well as help others improve their scuba skill set. You put this knowledge into action through a structured internship or series of practical training exercises.
+
+As you progress through your Divemaster course, you'll expand your diving knowledge, hone your skills and increase your confidence. Then, as a PADI Divemaster, you'll use these attributes to lead, mentor and motivate other divers and experience the joy of seeing them transformed by the majesty of the aquatic realm.
+
+Topics and practical workshops include:
+
+The role and characteristics of the PADI Divemaster
+Supervising dive activities and assisting with student divers
+Diver safety and risk management
+Divemaster conducted programs and specialised skills
+Business of diving and your career
+Awareness of the dive environment
+Dive setup and management
+Mapping an open water site
+Conducting dive briefings
+Conduct a Search & Recovery and a Deep Dive scenario or gain the specialties
+Conducting a scuba review and skin diver course
+Assisting with Discover Scuba Diving and leading Discover Local Diving programs
+
+E-Learn before/while you take the course
+
+Discounts are available for anyone who has signed up to PADI e-Learning and has associated the course to us through the online portal.
+
+What You Can Teach
+
+After becoming certified as a PADI Divemaster you will be qualified to:
+
+Supervise both training and non-training related activities by planning, organising and directing dives
+Assist a PADI Instructor during the training sessions for any PADI Diver course
+Conduct the PADI Skin Diver course and PADI Discover Snorkelling program
+Conduct the PADI Discover Local Diving experience
+Conduct the PADI Scuba Review programme
+Conduct PADI Discover Snorkelling programs
+Lead PADI Scuba Divers on guided dive tours
+Independently guide Open Water Diver course students on the tour portion of Open Water Diver course training dives 2, 3 and 4 at a ratio of two student divers per certified Divemaster.
+
+The Scuba Gear You Will Use
+
+As a dive professional, you'll want to have all your basic scuba equipment, including a dive computer, a dive knife, and at least two surface signalling devices.
+
+During practical skills exercises, like underwater mapping and search and recovery, you'll use a compass, floats, marker buoys, lift bags, and slates. Your PADI Instructor may suggest additional gear that will be useful throughout your diving career.
+
+You also need to have:
+
+Emergency First Response Primary and Secondary Care (CPR and First Aid) training within the past 24 months.
+A Medical Statement signed by a physician within the last 12 months.
+At least 40 logged dives to begin the course and 60 dives to earn certification.
+
+Share the Knowledge…and love.
+
+Wondering what's next? Check out the PADI Assistant Instructor or PADI Open Water Scuba Instructor courses.`,
+		difficulty: "Professional",
+		price: 950,
+		durationDays: 15,
+		seats: 4,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Not included",
+		requirements: "To enrol on the PADI Divemaster course you need to be at least 18 years old and have earned your PADI Rescue Diver certification.",
+		includes: [
+			"PADI Dive Instructor",
+			"Transfer from and to your hotel to the marina for the dives",
+			"Lunch when on the boat",
+			"Hot and cold beverages when on the boat",
+			"Marine Park fees where applicable"
+		],
+		excludes: [
+			"PADI Divemaster course materials",
+			"PADI certification fee"
+		],
+		image: courseImage("course-divemaster"),
+		images: [
+			courseImage("course-divemaster-01"),
+			courseImage("course-divemaster-02"),
+			courseImage("course-divemaster-03")
+		]
+	},
+	{
+		id: "course-reactivate",
+		title: "PADI ReActivate Scuba Refresher Program",
+		shortDescription: "ReActivate is the engaging, efficient way to refresh your dive knowledge and scuba skills. Move quickly through topics you know well, dive deeper on topics where your knowledge may have lapsed.",
+		longDescription: `COURSE OVERVIEW
+
+It's been a long time since your last dive and you want to start a short refresher programme? 
+
+Possible with Master Diving. You can start the e-learning programme from the comfort of your own home so that you have the theory back in your head.
+
+On site, you will discuss and implement your dive with your instructor. Customised exactly to your wishes.
+
+After this course, you can continue your diving trip as usual.`,
+		difficulty: "Beginner",
+		price: 110,
+		durationDays: 1,
+		seats: 12,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Not included",
+		requirements: "Dive Certificate",
+		includes: [
+			"e-learning, PADI e-card Certificate",
+			"1 Dive with instructor"
+		],
+		excludes: [
+			"Equipment"
+		],
+		image: courseImage("course-reactivate"),
+		images: [
+			courseImage("course-reactivate-01"),
+			courseImage("course-reactivate-02")
+		]
+	},
+	{
+		id: "course-junior",
+		title: "Junior scuba diver",
+		shortDescription: "The (Junior) Scuba Diver Course is fun, fast and an easy way to earn your first certificate.",
+		longDescription: `COURSE OVERVIEW
+
+The (Junior) Scuba Diver Course is actually a intermediate step to your Open Water Diver certificate. It is a part of the Open Water Diver Course i.e. the first 3 modules of theory, 2 confined water sessions concerning these modules and 2 open water dives.
+
+You will first be taught by your instructor the essentials of diving during the theory lessons of the 3 modules in a relaxed atmosphere.
+
+In the swimming pool or in shallow water you will perform the confined water sessions where you will practice to master the required skills to dive efficiently and safely.
+
+Buoyancy control, ascending and descending, breathing underwater, buddy diving techniques, preventing common problems underwater, diving environments and aquatic life are all part of the course.
+
+During the 2 open water dives you will put into practice the skills you learned in the swimming pool. And above all you will discover the wonderful underwater world of the Red Sea. You have the chance to gain confidence and comfort underwater.
+
+The (Junior) Scuba Diver certificate allows you to dive under the supervision of a dive professional till a depth of maximum 12 meters.
+
+After finishing successfully the (Junior) Scuba Diver Course it is just a small step to the Open Water Diver Course.
+
+Are you ready to start your journey to become a certified diver? Start easy and subscribe to our (Junior) Scuba Diver Course.
+
+Course place: The course takes place at the diving center.
+
+Course schedule:
+
+day in the class room (theory and knowledge reviews) and confined water dives.
+ day on the boat for 2 open water dives.`,
+		difficulty: "Beginner",
+		price: 305,
+		durationDays: 2,
+		seats: 8,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Included",
+		requirements: "To sign up for the (Junior) Scuba Diver Course you need to be at least 10 years of age, have the adequate swimming skills and you have to be in a good health condition.",
+		includes: [
+			"Transfer from and to your hotel.",
+			"Instructor.",
+			"Diving Equipment.",
+			"Tanks and weights.",
+			"Course material."
+		],
+		excludes: [
+			"Any personal expenses."
+		],
+		image: courseImage("course-junior"),
+		images: [
+			courseImage("course-junior-01"),
+			courseImage("course-junior-02")
+		]
+	},
+	{
+		id: "course-jowd",
+		title: "PADI Junior Open Water Diver Course",
+		shortDescription: "The PADI Junior Open Water Diver course is perfect for kids aged 10 to 14 who have a thirst for knowledge and adventure. Thousands of children around the world have been certified via PADI and are now enjoying exploring the mysteries of the underwater world.",
+		longDescription: `COURSE OVERVIEW
+
+The PADI Junior Open Water Diver course is perfect for kids aged 10 to 14 who have a thirst for knowledge and adventure. Thousands of children around the world have been certified via PADI and are now enjoying exploring the mysteries of the underwater world.
+
+The PADI Junior Open Water Certification is recognised in more countries around the world than any other qualification and ensures that younger divers have the appropriate level of knowledge, skills and training to safely dive to depths of up to 18 metres.
+
+During the course, you'll make four pool dives and four Open Water dives at a local dive site under the supervision of your PADI Instructor.
+
+What you'll learn
+
+The PADI Junior Open Water Diver course consists of three main phases:
+
+Knowledge Development to understand basic principles of scuba diving. This can also be done via e-learning, see below.
+Confined Water Dives to learn basic scuba skills
+Open Water Dives to review your skills and explore the underwater world.
+
+As a result, you will become a confident and skilled diver who can assemble and use scuba gear, descend and ascend safely, manage your buoyancy and handle common problems. You'll also begin to understand and appreciate the delicate marine ecosystems and respectfully approach marine life.
+
+If you've participated in a PADI Discover Scuba Diving experience, the skills you learned may be credited towards a portion of the full PADI Junior Open Water Diver course certification.
+
+E-Learn before You Dive
+
+Discounts are available for anyone who has signed up to PADI e-Learning and has associated the course to us through the online portal.
+
+For more information on eLearning Click Here
+
+The Scuba Gear You Will Use
+
+All the equipment you will need is provided for the PADI Junior Open Water Diving course. You'll use all the basic scuba gear including a mask and snorkel, fins, a wetsuit, a buoyancy compensating jacket (BCD) that carries the scuba tank, a scuba regulator to breathe from and gauges to monitor depth and air supply. Your PADI instructor will also give you an introduction into using dive computers and compasses.
+
+Course Prerequisites
+
+To enrol on the PADI Junior Open Water Diver course you need to be at least 10 years old, be able to swim at least 200m without stopping and be able to tread water for 10 minutes. For children under 10 years of age there is the PADI Bubblemaker course.
+
+You will also need to complete a standard PADI Medical form which may require a doctor's signature to say you are fit to dive if you have any pertinent medical history. If you've never suffered from any of the conditions listed, your parent or guardian can sign it on your behalf.
+
+Continue The Adventure...
+
+Now you're an excited certified PADI Junior Open Water Diver, where do you go from here?
+
+You can continue learning with one of the many PADI Specialty Diving courses. The PADI Fish Identification course is a great way to get to know all the colourful and interesting sea creatures you are diving with.
+
+Once you reach the age of 15 you have the option of moving onto the PADI Advanced Open Water diver course, where you will increase your diving experience and develop your underwater skills to increase your proficiency as a diver.`,
+		difficulty: "Beginner",
+		price: 405,
+		durationDays: 4,
+		seats: 8,
+		certification: "PADI",
+		instructor: "Staff Instructor",
+		nextStart: "TBA",
+		equipment: "Included",
+		requirements: "At least 10 years old, able to swim 200m, tread water for 10 minutes",
+		includes: [
+			"PADI Junior Open Water Diver materials",
+			"PADI certification fee",
+			"PADI Dive Instructor",
+			"Dive equipment",
+			"Confined water training sessions",
+			"4 Open water training dives",
+			"Transfer from and to your hotel to the marina for the dives",
+			"Lunch when on the boat",
+			"Hot and cold beverages when on the boat",
+			"Marine Park fees where applicable"
+		],
+		excludes: [],
+		image: courseImage("course-jowd"),
+		images: [
+			courseImage("course-jowd-01"),
+			courseImage("course-jowd-02")
+		]
+	}
+];
+
+export const trips = [
+	{
+		id: "trip-01",
+		title: "Azure Atolls",
+		description: "Liveaboard escape across crystalline reefs and manta corridors.",
+		price: 1450,
+		durationDays: 6,
+		seats: 10,
+		destination: "Maldives",
+		departureDate: "2026-06-20",
+		image: tripImage("trip-01")
+	},
+	{
+		id: "trip-02",
+		title: "Nordic Kelp Forests",
+		description: "Cold-water exploration with drysuit support and expert guides.",
+		price: 980,
+		durationDays: 4,
+		seats: 8,
+		destination: "Norway",
+		departureDate: "2026-07-08",
+		image: tripImage("trip-02")
+	}
+];
+
+export const specialties = [
+	{
+		id: "spec-deep",
+		title: "PADI Deep Diver Specialty",
+		shortDescription: "Do you want to explore a little deeper? Have you wondered what those same dive sites look like from a deeper perspective? Do you want to get more from your dive holidays and explore some of those deeper wrecks?",
+		longDescription: `COURSE OVERVIEW
+
+Do you want to explore a little deeper? Have you wondered what those same dive sites look like from a deeper perspective? Do you want to get more from your dive holidays and explore some of those deeper wrecks? Whatever it is, if you want to scuba dive with confidence at depths down to 40 metres/130 feet, you should consider the PADI Deep Diver Specialty course.
+
+What you'll learn
+
+Deep diving has more risk factors, so your training starts by reviewing the reasons for deep diving and how important it is to know your personal limits. During the course you'll explore ways to manage hazards, planning and managing air consumption and understanding reduced no-decompression limits.
+
+With your PADI instructor you will cover;
+
+Techniques for diving in the deeper range of 18-40 metres/ 60-130 feet.
+Specialised deep diving equipment considerations.
+Deep dive planning, buddy contact procedures and buoyancy control.
+Additional hazards and considerations for deep diving and planning including increased risk of narcosis, managing your air supply, and shorter no decompression limits.
+Emergency decompression procedures.
+Experience in planning, organising, and making at least four deep dives under the supervision of your PADI Instructor.
+
+The Scuba Gear You Will Use
+
+All the equipment you will need is provided for the PADI Deep Diver Specialty. You'll use all the basic scuba gear including a mask and snorkel, fins, a wetsuit, a buoyancy compensating jacket (BCD) that carries the scuba tank, a scuba regulator to breathe from and gauges to monitor depth and air supply. Your PADI instructor will also provide you with a dive computer which is necessary for the course.
+
+You will also need to complete a standard PADI Medical form which may require a doctor's signature to say you are fit to dive if you have any pertinent medical history. If you've never suffered from any of the conditions listed, you can sign it yourself.
+
+Continue The Adventure...
+
+Planning & executing a deep dive is awesome enough but why not take advantage of your extended depth limits during the PADI Wreck Diver specialty. Your new knowledge and skills will allow you to access ad penetrate wrecks that are not available to other divers up-to a maximum of 40 metres.`,
+		difficulty: "Advanced",
+		price: 260,
+		durationDays: 2,
+		certification: "PADI",
+		equipment: "Not included",
+		requirements: "If you've earned the PADI Adventure Diver rating or higher, and you're at least 15 years old, you can enrol in the PADI Deep Diver course.",
+		includes: [
+			"PADI Deep Diver course materials",
+			"PADI certification fee",
+			"PADI Dive Instructor",
+			"Dive equipment",
+			"4 training dives",
+			"Transfer from and to your hotel to the marina for the dives",
+			"Lunch when on the boat",
+			"Hot and cold beverages when on the boat",
+			"Marine Park fees where applicable"
+		],
+		excludes: [],
+		image: specialtyImage("spec-deep"),
+		images: [
+			specialtyImage("spec-deep-01"),
+			specialtyImage("spec-deep-02")
+		]
+	},
+	{
+		id: "spec-night",
+		title: "PADI Night Diver Specialty",
+		shortDescription: "Ever been on a dive during the day and watched the marine life while wondering \"what happens to you at night?\" Dive sites takes on a new personality at night as many underwater creatures and plant life (different from those you see during the day) are active at night.",
+		longDescription: `COURSE OVERVIEW
+
+Ever been on a dive during the day and watched the marine life while wondering "what happens to you at night?" Dive sites takes on a new personality at night as many underwater creatures and plant life (different from those you see during the day) are active at night.
+
+The PADI Night Diver Specialty offers a unique opportunity to witness marine life's nocturnal behaviour under the moonlight and learn a whole new way of communicating with light! Diving in the dark adds a certain spice and excitement to a dive and provides two different dives at the same site!
+
+What you'll learn
+
+You'll perform three training dives during the PADI Night Diver Specialty. You will focus on what's visible in your light's beam, controlling your buoyancy with less visual references and close buddy contact. You will also perform the vital safety checks usually done before a day dive, while making sure you pay extra attention to detail, so nothing is overlooked. Key course topics include.
+
+· Planning, organization, procedures, techniques, problems & hazards of night diving
+· Proper procedures for buoyancy control, navigation and communication
+· Use of dive lights and buddy-system techniques
+· Disorientation and emergency procedures
+· Orientation to nocturnal aquatic life
+
+The Scuba Gear You Will Use
+
+All the equipment you will need is provided for the PADI Night Diver Specialty. You'll use all the basic scuba gear including a mask and snorkel, fins, a wetsuit, a buoyancy compensating jacket (BCD) that carries the scuba tank, a scuba regulator to breathe from and gauges to monitor depth and air supply. Your PADI instructor will also share with you a dive torch and compass.
+
+Continue The Adventure...
+
+Now you have seen marine life at night, you might want to capture the moment! The PADI Underwater Photographer Specialty will teach you about light sources and the best angles to shoot from. Then you can start to compare the different species you say in the day and at night.`,
+		difficulty: "Intermediate",
+		price: 290,
+		durationDays: 1,
+		certification: "PADI",
+		equipment: "Not included",
+		requirements: "You must be a PADI Open Water Diver or PADI Junior Open Water Diver and be at least 12 years old to participate in the PADI Night Diver Specialty. You will also need to complete a standard PADI Medical form which may require a doctor's signature to say you are fit to dive if you have any pertinent medical history. If you've never suffered from any of the conditions listed, you can sign it yourself.",
+		includes: [
+			"PADI Night Diver course materials",
+			"PADI certification fee",
+			"PADI Dive Instructor",
+			"Dive equipment",
+			"3 training dives",
+			"Marine Park fees where applicable"
+		],
+		excludes: [],
+		image: specialtyImage("spec-night"),
+		images: [
+			specialtyImage("spec-night-01"),
+			specialtyImage("spec-night-02")
+		]
+	},
+	{
+		id: "spec-nitrox",
+		title: "PADI Enriched Air Diver (Nitrox) Specialty",
+		shortDescription: "Chances are you have heard divers or your PADI Instructor talk about Nitrox. But what is it exactly and why might you want to take the PADI Enriched Air (Nitrox) specialty course?",
+		longDescription: `COURSE OVERVIEW
+
+Nitrox is when they change the regular tank of air you breath when diving and add in more oxygen to it. When you are diving with Nitrox, you are breathing enriched air (with extra Oxygen in it). Nitrox, or Enriched Air Nitrox (EANx), is simply the term used for nitrogen mixed with an oxygen percentage that is increased above "standard" air. With standard scuba cylinders, the percentage of oxygen is about 20.8%, which is very close to what we breathe in everyday life on the surface.
+
+Why would you need to dive with Nitrox? Diving with enriched air nitrox lets you safely extend your no stop time beyond the no decompression limits for air. Diving with enriched air nitrox means more no decompression time underwater – but you need to be certified as a PADI Enriched Air Diver to use and get enriched air fills. Whether you're into underwater photography or wreck diving, on vacation in some tropical paradise or just out for a leisurely day of diving at your local dive site, the PADI Enriched Air Diver course helps you get more out of diving by giving you more no decompression time underwater
+
+What you'll learn
+
+The PADI Enriched Air Diver Specialty course does not required in-water training. The course has two sections, theory and a practical session which will be held in our classroom or while our on the boat during a daily dive day.
+
+You will learn everything you need to know to take advantage of higher oxygen content including;
+
+Techniques for getting more dive time by using enriched air nitrox
+Enriched air scuba diving equipment considerations
+Enriched air considerations, including managing oxygen exposure, how to tell what's in your scuba tank
+Practice analysing oxygen content in your scuba tank
+How to set and use your dive computer when diving with Nitrox
+
+Continue The Adventure...
+
+Underwater photographers often dive with enriched air to maximise the number of pictures they capture. Now that you are nitrox certified why not harness this skill to improve your photography skills by undertaking the PADI Digital Underwater Photographer specialty.`,
+		difficulty: "Beginner",
+		price: 240,
+		durationDays: 1,
+		certification: "PADI",
+		equipment: "Not included",
+		requirements: "To participate in the PADI Enriched Air Diver Specialty Course you must be at least 12 years old and hold a PADI Open (Junior) Water Diver certification.",
+		includes: [
+			"PADI Enriched Air Diver course materials",
+			"PADI certification fee",
+			"PADI Dive Instructor"
+		],
+		excludes: [
+			"As this is a 'dry' course dives with or without Nitrox are not included",
+			"Nitrox tanks"
+		],
+		image: specialtyImage("spec-nitrox"),
+		images: [
+			specialtyImage("spec-nitrox-01"),
+			specialtyImage("spec-nitrox-02")
+		]
+	},
+	{
+		id: "spec-sidemount",
+		title: "PADI Sidemount Diver Specialty",
+		shortDescription: "You'll have most likely learned to dive in the normal fashion with a single tank on your back. But having scuba tanks on your back isn't a requirement for exploring the underwater world.",
+		longDescription: `COURSE OVERVIEW
+
+You'll have most likely learned to dive in the normal fashion with a single tank on your back. But having scuba tanks on your back isn't a requirement for exploring the underwater world. The PADI Sidemount Diver Specialty will teach you the fundamentals of diving with one, two or more scuba tanks mounted down your side instead of on your back.
+
+People often ask, why dive sidemount? Those that have experienced this style of diving list the benefits as:
+
+An alternate and often easier way to streamline in the water. You will feel free and less restricted.
+Increased air supply without overloading your body with cumbersome and heavy dive equipment.
+Enables easier equipment transportation, more relaxed entries and exits as well as reducing strain on the body.
+Increases safety with a redundant air source and allows incredibly easy access to your air supply.
+
+What you'll learn
+
+The PADI Sidemount Diver Specialty teaches you about the many benefits of diving with a sidemount configuration.
+
+During one confined water and three open water scuba dives you'll learn how to:
+
+Properly assemble and configure sidemount scuba diving equipment.
+Trim your weight system and sidemount gear so you're perfectly balanced in the water.
+Manage air by switching second stages as planned, if wearing two cylinders.
+Understand the planning considerations and safety concerns for sidemount diving
+Respond correctly to potential problems when sidemount diving.
+
+The Scuba Gear You Will Use
+
+All the equipment you will need is provided for the PADI Sidemount Diver Specialty. You'll use all the basic scuba gear including a mask and snorkel, fins, a wetsuit, a buoyancy compensating jacket (BCD) that carries the scuba tank, a scuba regulator to breathe from and gauges to monitor depth and air supply. Your PADI instructor will provide the necessary sidemout configuration for the tanks.
+
+Continue The Adventure...
+
+Sidemount and drift diving are perfect partners. Now that you have earned your PADI Sidemount Diver certification why not continue your learning journey with the PADI Drift Diver Specialty. This will teach you principals of diving with the flow of the current and help you enjoy your diving even more than you already do.`,
+		difficulty: "Advanced",
+		price: 350,
+		durationDays: 2,
+		certification: "PADI",
+		equipment: "Included",
+		requirements: "You must be a PADI Open Water Diver or PADI Junior Open Water Diver and be at least 15 years old to participate in the PADI Sidemount Diver Specialty. You will also need to complete a standard PADI Medical form which may require a doctor's signature to say you are fit to dive if you have any pertinent medical history. If you've never suffered from any of the conditions listed, you can sign it yourself.",
+		includes: [
+			"PADI Sidemount Diver course materials",
+			"PADI certification fee",
+			"PADI Dive Instructor",
+			"Dive equipment",
+			"4 training dives",
+			"Transfer from and to your hotel to the marina for the dives",
+			"Lunch when on the boat",
+			"Hot and cold beverages when on the boat",
+			"Marine Park fees where applicable"
+		],
+		excludes: [],
+		image: specialtyImage("spec-sidemount"),
+		images: [
+			specialtyImage("spec-sidemount-01"),
+			specialtyImage("spec-sidemount-02")
+		]
+	},
+	{
+		id: "spec-wreck",
+		title: "PADI Wreck Diver Specialty",
+		shortDescription: "Whether sunk on purpose as an artificial reef or the result of a disaster, wrecks open intriguing windows to the past. Most divers find wrecked ships and vessel's fascinating and enjoy unlocking the mysteries they have to offer.",
+		longDescription: `COURSE OVERVIEW
+
+Whether sunk on purpose as an artificial reef or the result of a disaster, wrecks open intriguing windows to the past. Most divers find wrecked ships and vessel's fascinating and enjoy unlocking the mysteries they have to offer. They are also usually teeming with aquatic life so are perfect dive sites for the keen underwater naturalists or photographers. The PADI Wreck Diver course teaches you the fundamentals of responsible wreck diving and how to access things others may overlook. Sometimes, only the trained, experienced eye recognises what caused a vessel's demise.
+
+What you'll learn
+
+The PADI Wreck diving specialty introduces the fundamentals of limited wreck penetration with line laying techniques. Navigating around and inside wrecks is particularly important as low visibility, silt and poor light penetration mean buoyancy, trim and finning techniques are incredibly important.
+
+With the emphasis on safety, with your PADI Instructor you'll cover;
+
+Techniques for diving exploring and navigating shipwrecks
+How to avoid common hazards and deal with challenging situations.
+How to research and learn the background of your favourite wrecks.
+Mapping and measuring wrecks.
+Wreck diving equipment considerations.
+Considerations and techniques for entering/penetrating intact wrecks.
+Experience in planning, organising and making at least four wreck dives under the supervision of your PADI Instructor.
+
+The Scuba Gear You Will Use
+
+All the equipment you will need is provided for the PADI Wreck Diver Specialty. You'll use all the basic scuba gear including a mask and snorkel, fins, a wetsuit, a buoyancy compensating jacket (BCD) that carries the scuba tank, a scuba regulator to breathe from and gauges to monitor depth and air supply. Your PADI instructor will also provide you with a dive computer and navigation lines/measures which are necessary for the course.
+
+Continue The Adventure...
+
+Many shipwrecks are often found in deeper water. That's why the PADI Wreck Diver course is a natural companion to the PADI Deep Diver course. Other training to consider is the PADI Enriched Air Diver course to extend your bottom time or the PADI Underwater Photographer Specialty to help you capture more vivid and artistic images.`,
+		difficulty: "Advanced",
+		price: 240,
+		durationDays: 1,
+		certification: "PADI",
+		equipment: "Not included",
+		requirements: "If you've earned the PADI Adventure Diver rating or higher, and you're at least 15 years old, you can enrol in the PADI Wreck Diver course. You will also need to complete a standard PADI Medical form which may require a doctor's signature to say you are fit to dive if you have any pertinent medical history. If you've never suffered from any of the conditions listed, you can sign it yourself.",
+		includes: [
+			"PADI Wreck Diver course materials",
+			"PADI certification fee",
+			"PADI Dive Instructor",
+			"2 training dives",
+			"Transfer from and to your hotel to the marina for the dives",
+			"Lunch when on the boat",
+			"Hot and cold beverages when on the boat",
+			"Marine Park fees where applicable"
+		],
+		excludes: [
+			"Dive equipment"
+		],
+		image: specialtyImage("spec-wreck"),
+		images: [
+			specialtyImage("spec-wreck-01"),
+			specialtyImage("spec-wreck-02")
+		]
+	}
+];
+
+export const galleryImages = [...SCUBA_IMAGES.gallery];
+
+export const divingExperiences = [];
+
+export const testimonials = [
+	{
+		name: "Ava Holm",
+		role: "Advanced Diver",
+		quote: "The training felt calm, intentional, and incredibly premium. I left with full confidence in my skills."
+	},
+	{
+		name: "Luca Marin",
+		role: "Underwater Photographer",
+		quote: "Every detail was thoughtfully curated. The courses are structured for serious growth."
+	},
+	{
+		name: "Nina Volkova",
+		role: "Traveler",
+		quote: "A beautiful balance of safety, elegance, and adventure. The trips are unforgettable."
+	}
+];

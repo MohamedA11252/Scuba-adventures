@@ -1,0 +1,151 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { specialties } from '../../../lib/mock-data';
+import { getLangFromPathname, getTranslations } from '../../../lib/i18n';
+
+const lang = getLangFromPathname(Astro.url.pathname);
+const t = getTranslations(lang);
+
+const specialty = specialties.find(s => s.id === Astro.params.specialtyId);
+
+if (!specialty) {
+  return Astro.redirect('/ru/specialties');
+}
+---
+
+<MainLayout title={specialty.title} description={specialty.shortDescription}>
+  <section class="pt-28 pb-16 bg-background" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/ru/specialties" class="text-secondary hover:underline mb-8 inline-block">← Вернуться к специализациям</a>
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <div class="relative h-96 overflow-hidden rounded-xl shadow-premium">
+          <img id="heroImage" src={specialty.images[0]} alt={specialty.title} class="w-full h-full object-cover transition-opacity duration-500" loading="lazy" />
+          <button id="prevImage" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">‹</button>
+          <button id="nextImage" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">›</button>
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" id="imageDots">
+            {specialty.images.map((_, i) => (
+              <button class="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-colors {i === 0 ? 'bg-white' : ''}" data-index={i}></button>
+            ))}
+          </div>
+        </div>
+        
+        <div>
+          <h1 class="text-4xl font-bold text-primary mb-4">{specialty.title}</h1>
+          
+          <div class="bg-surface border border-gray-200/50 rounded-lg p-6 space-y-4 mb-8">
+            {specialty.price && (
+              <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+                <span class="text-text-secondary">Цена</span>
+                <span class="text-3xl font-bold text-primary">€{specialty.price}</span>
+              </div>
+            )}
+            
+            {specialty.durationDays && (
+              <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+                <span class="text-text-secondary">Продолжительность</span>
+                <span class="font-semibold">{specialty.durationDays} день{specialty.durationDays > 1 ? 'и' : ''}</span>
+              </div>
+            )}
+            
+            {specialty.equipment && (
+              <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+                <span class="text-text-secondary">Оборудование</span>
+                <span class="font-semibold">{specialty.equipment}</span>
+              </div>
+            )}
+            
+            {specialty.requirements && (
+              <div class="flex items-center justify-between">
+                <span class="text-text-secondary">Требования</span>
+                <span class="font-semibold">{specialty.requirements}</span>
+              </div>
+            )}
+          </div>
+          
+          <button class="w-full bg-secondary text-white py-3 rounded-md font-semibold hover:bg-opacity-90 transition-colors">
+            Забронировать
+          </button>
+        </div>
+      </div>
+      
+      <div class="mb-12">
+        <div class="prose prose-sm max-w-none">
+          {specialty.longDescription.split('\n\n').map((paragraph) => (
+            <p class="text-text-secondary mb-4 leading-relaxed">{paragraph}</p>
+          ))}
+        </div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 mb-12">
+        {specialty.includes && specialty.includes.length > 0 && (
+          <div>
+            <h3 class="text-xl font-bold text-primary mb-4">Включено</h3>
+            <ul class="space-y-3">
+              {specialty.includes.map((item) => (
+                <li class="flex items-start gap-3">
+                  <span class="text-accent mt-1 font-bold">✓</span>
+                  <span class="text-text-secondary">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {specialty.excludes && specialty.excludes.length > 0 && (
+          <div>
+            <h3 class="text-xl font-bold text-primary mb-4">Не включено</h3>
+            <ul class="space-y-3">
+              {specialty.excludes.map((item) => (
+                <li class="flex items-start gap-3">
+                  <span class="text-accent mt-1 font-bold">−</span>
+                  <span class="text-text-secondary">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .prose p {
+    margin-bottom: 1rem;
+  }
+</style>
+
+<script define:vars={{ images: specialty.images }}>
+  let currentIndex = 0;
+  
+  const heroImage = document.getElementById('heroImage');
+  const dots = document.querySelectorAll('#imageDots button');
+  const prevBtn = document.getElementById('prevImage');
+  const nextBtn = document.getElementById('nextImage');
+  
+  const updateImage = (index) => {
+    currentIndex = index;
+    heroImage.style.opacity = '0';
+    setTimeout(() => {
+      heroImage.src = images[currentIndex];
+      heroImage.style.opacity = '1';
+    }, 200);
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('bg-white', i === currentIndex);
+      dot.classList.toggle('bg-white/50', i !== currentIndex);
+    });
+  };
+  
+  prevBtn?.addEventListener('click', () => {
+    updateImage((currentIndex - 1 + images.length) % images.length);
+  });
+  
+  nextBtn?.addEventListener('click', () => {
+    updateImage((currentIndex + 1) % images.length);
+  });
+  
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => updateImage(i));
+  });
+</script>

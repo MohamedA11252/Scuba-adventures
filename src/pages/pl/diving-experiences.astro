@@ -1,0 +1,108 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import DivingExperienceCard from '../../components/features/DivingExperienceCard.astro';
+import { divingExperiences } from '../../lib/mock-data';
+import { getLangFromPathname, getTranslations } from '../../lib/i18n';
+
+const lang = getLangFromPathname(Astro.url.pathname);
+const t = getTranslations(lang);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: divingExperiences.map((experience, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: experience.title,
+    description: experience.shortDescription
+  }))
+};
+---
+
+<MainLayout title="Diving Experiences" description="Explore incredible scuba diving experiences.">
+  <section class="pt-28 pb-16 bg-background" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold">Diving Experiences</h1>
+        <p class="text-lg text-text-secondary mt-3">Discover unforgettable moments beneath the waves with our curated diving experiences.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-1 gap-8">
+        {divingExperiences.map(experience => (
+          <div class="w-full">
+            <div class="bg-surface border border-gray-200/50 rounded-xl overflow-hidden shadow-premium hover:shadow-lg transition-shadow">
+              <div class="grid md:grid-cols-2 gap-0">
+                <div class="relative h-64 md:h-full min-h-96 overflow-hidden">
+                  <img src={experience.image} alt={experience.title} class="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div class="p-6 md:p-8 flex flex-col">
+                  <h2 class="text-3xl font-bold text-primary mb-4">{experience.title}</h2>
+                  
+                  <div class="prose prose-sm max-w-none mb-6">
+                    {experience.description.split('\n\n').map((paragraph) => (
+                      <p class="text-text-secondary mb-4">{paragraph}</p>
+                    ))}
+                  </div>
+                  
+                  <div class="space-y-3 mb-6">
+                    {experience.durationHours && (
+                      <div class="flex items-center gap-2 text-sm text-text-secondary">
+                        <span class="font-semibold">Duration:</span>
+                        <span>{experience.durationHours} hours</span>
+                      </div>
+                    )}
+                    {experience.maxDivers && (
+                      <div class="flex items-center gap-2 text-sm text-text-secondary">
+                        <span class="font-semibold">Max Group:</span>
+                        <span>{experience.maxDivers} people</span>
+                      </div>
+                    )}
+                    {experience.price && (
+                      <div class="flex items-center gap-3">
+                        <span class="text-3xl font-bold text-primary">${experience.price}</span>
+                        <span class="text-sm text-text-secondary">per person</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <h3 class="text-sm font-semibold text-primary mb-3">Included:</h3>
+                      <ul class="space-y-2">
+                        {experience.includes.map((item) => (
+                          <li class="flex items-start gap-2 text-sm text-text-secondary">
+                            <span class="text-accent mt-0.5 font-bold">✓</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 class="text-sm font-semibold text-primary mb-3">Excluded:</h3>
+                      <ul class="space-y-2">
+                        {experience.excludes.map((item) => (
+                          <li class="flex items-start gap-2 text-sm text-text-secondary">
+                            <span class="text-accent mt-0.5 font-bold">−</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <button class="w-full bg-secondary text-white py-3 rounded-md font-semibold hover:bg-opacity-90 transition-colors mt-auto">
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script type="application/ld+json">
+  {JSON.stringify(jsonLd)}
+</script>
