@@ -1,6 +1,7 @@
 ---
 import MenuIcon from '../icons/Menu.astro';
 import GlobeIcon from '../icons/Globe.astro';
+import ChevronDownIcon from '../icons/ChevronDown.astro';
 import { getLangFromPathname, switchLanguagePath } from '../../lib/i18n';
 import { getTranslations } from '../../lib/i18n';
 import { BRAND_NAME } from '../../lib/brand';
@@ -13,10 +14,14 @@ const pathname = Astro.url.pathname;
 
 const navLinks = [
 	{ href: `${basePath}/`, text: t.nav.home },
+	{ href: `${basePath}/contact`, text: t.nav.contact }
+];
+
+const divingLinks = [
 	{ href: `${basePath}/courses`, text: t.nav.courses },
 	{ href: `${basePath}/specialties`, text: t.nav.specialties },
 	{ href: `${basePath}/one-week-adventure`, text: t.nav.adventure },
-	{ href: `${basePath}/contact`, text: t.nav.contact }
+	{ href: `${basePath}/daily-dive`, text: t.nav.dailyDive }
 ];
 
 const langOptions = [
@@ -29,52 +34,76 @@ const accountHref = user ? `${basePath}/dashboard` : `${basePath}/signin`;
 const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 ---
 
-<header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200/60">
+<header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-md border-b border-ocean-muted/20">
 	<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center justify-between h-20">
 			<div class="flex-shrink-0">
-				<a href={`${basePath}/`} class="text-2xl font-bold text-primary tracking-tight">{BRAND_NAME}</a>
+				<a href={`${basePath}/`} class="flex items-center gap-2">
+					<img src="/New Logo.png" alt="Scuba Academy Logo" class="h-12 w-12" />
+					<span class="text-xl font-bold text-ocean-dark tracking-tight hidden sm:block">{BRAND_NAME}</span>
+				</a>
 			</div>
 			<div class="hidden md:block">
 				<div class="ml-10 flex items-baseline space-x-1">
 					{navLinks.map((link) => (
-						<a href={link.href} class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">{link.text}</a>
+						<a href={link.href} class="text-text-secondary hover:text-ocean-dark px-3 py-2 rounded-md text-sm font-medium transition-colors">{link.text}</a>
 					))}
+					<div class="relative" id="diving-dropdown">
+						<button type="button" class="diving-dropdown-btn text-text-secondary hover:text-ocean-dark px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1" aria-haspopup="true" aria-expanded="false">
+							<span>{t.nav.diving}</span>
+							<ChevronDownIcon class="w-4 h-4 diving-chevron transition-transform duration-200 text-ocean-muted" />
+						</button>
+						<div class="diving-dropdown-menu absolute left-0 mt-2 w-56 rounded-md shadow-premium bg-white border border-ocean-muted/30 hidden overflow-hidden" role="menu">
+							{divingLinks.map((link) => (
+								<a href={link.href} class="block px-4 py-3 text-sm text-text-secondary hover:text-ocean-dark hover:bg-ocean-muted/10 transition-colors" role="menuitem">{link.text}</a>
+							))}
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="hidden md:flex items-center space-x-4">
 				<div class="relative" id="lang-menu-desktop">
-					<button type="button" class="text-gray-700 hover:text-primary flex items-center gap-2 text-sm font-medium" aria-haspopup="true" aria-expanded="false">
+					<button type="button" class="text-text-secondary hover:text-ocean-dark flex items-center gap-2 text-sm font-medium transition-colors" aria-haspopup="true" aria-expanded="false">
 						<GlobeIcon />
 						<span>{lang.toUpperCase()}</span>
 					</button>
-					<div class="absolute right-0 mt-2 w-36 rounded-md shadow-premium bg-white border border-gray-200 hidden" data-lang-panel>
+					<div class="absolute right-0 mt-2 w-36 rounded-md shadow-premium bg-white border border-ocean-muted/30 hidden" data-lang-panel>
 						{langOptions.map((opt) => (
-							<a href={switchLanguagePath(pathname, opt.code)} class="block px-4 py-2 text-sm text-gray-700 hover:text-primary hover:bg-gray-50">{opt.label}</a>
+							<a href={switchLanguagePath(pathname, opt.code)} class="block px-4 py-2 text-sm text-text-secondary hover:text-ocean-dark hover:bg-ocean-muted/10">{opt.label}</a>
 						))}
 					</div>
 				</div>
-				<a href={accountHref} class="bg-secondary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition-colors">{accountLabel}</a>
+				<a href={accountHref} class="bg-secondary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-ocean-muted transition-colors">{accountLabel}</a>
 			</div>
 			<div class="-mr-2 flex md:hidden">
-				<button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary focus:outline-none" aria-label="Open menu">
+				<button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-text-secondary hover:text-ocean-dark focus:outline-none transition-colors" aria-label="Open menu">
 					<MenuIcon />
 				</button>
 			</div>
 		</div>
 	</nav>
 
-	<div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
+	<div id="mobile-menu" class="md:hidden hidden border-t border-ocean-muted/20 bg-white">
 		<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-			{navLinks.map((link) => (
-				<a href={link.href} class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">{link.text}</a>
-			))}
-			<div class="border-t border-gray-200 my-2"></div>
-			<a href={accountHref} class="bg-secondary text-white block text-center w-full px-4 py-2 rounded-md text-sm font-medium">{accountLabel}</a>
-			<div class="pt-4 border-t border-gray-200">
-				<p class="text-xs text-gray-500 uppercase tracking-wide mb-2 px-3">{t.nav.language ?? 'Language'}</p>
+			<a href={`${basePath}/`} class="text-text-secondary hover:text-ocean-dark block px-3 py-2 rounded-md text-base font-medium transition-colors">{t.nav.home}</a>
+			<div class="mobile-diving-section">
+				<button type="button" id="mobile-diving-toggle" class="w-full text-left text-text-secondary hover:text-ocean-dark px-3 py-2 rounded-md text-base font-medium flex items-center justify-between transition-colors">
+					<span>{t.nav.diving}</span>
+					<ChevronDownIcon id="mobile-diving-chevron" class="w-4 h-4 transition-transform duration-200 text-ocean-muted" />
+				</button>
+				<div id="mobile-diving-links" class="hidden pl-6 space-y-1">
+					{divingLinks.map((link) => (
+						<a href={link.href} class="text-text-secondary hover:text-ocean-dark block px-3 py-2 rounded-md text-sm transition-colors">{link.text}</a>
+					))}
+				</div>
+			</div>
+			<a href={`${basePath}/contact`} class="text-text-secondary hover:text-ocean-dark block px-3 py-2 rounded-md text-base font-medium transition-colors">{t.nav.contact}</a>
+			<div class="border-t border-ocean-muted/20 my-2"></div>
+			<a href={accountHref} class="bg-secondary text-white block text-center w-full px-4 py-2 rounded-md text-sm font-medium hover:bg-ocean-muted transition-colors">{accountLabel}</a>
+			<div class="pt-4 border-t border-ocean-muted/20">
+				<p class="text-xs text-ocean-dark uppercase tracking-wide mb-2 px-3">{t.nav.language ?? 'Language'}</p>
 				{langOptions.map((opt) => (
-					<a href={switchLanguagePath(pathname, opt.code)} class="text-gray-700 hover:text-primary block px-3 py-2">{opt.label}</a>
+					<a href={switchLanguagePath(pathname, opt.code)} class="text-text-secondary hover:text-ocean-dark block px-3 py-2 transition-colors">{opt.label}</a>
 				))}
 			</div>
 		</div>
@@ -82,6 +111,8 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 </header>
 
 <script>
+	import { gsap } from 'gsap';
+
 	const CLOSE_DELAY_MS = 400;
 
 	const setupLangMenu = (rootId: string) => {
@@ -115,9 +146,64 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 
 	setupLangMenu('lang-menu-desktop');
 
+	const divingDropdown = document.getElementById('diving-dropdown');
+	const divingBtn = divingDropdown?.querySelector('.diving-dropdown-btn');
+	const divingMenu = divingDropdown?.querySelector('.diving-dropdown-menu');
+	const divingChevron = divingDropdown?.querySelector('.diving-chevron');
+
+	let divingOpen = false;
+	let divingHoverTimer: ReturnType<typeof setTimeout> | null = null;
+
+	const openDiving = () => {
+		if (divingHoverTimer) clearTimeout(divingHoverTimer);
+		if (!divingOpen) {
+			divingOpen = true;
+			divingMenu?.classList.remove('hidden');
+			divingBtn?.setAttribute('aria-expanded', 'true');
+			gsap.to(divingChevron, { rotation: 180, duration: 0.2, ease: 'power2.out' });
+			gsap.fromTo(divingMenu, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' });
+		}
+	};
+
+	const closeDiving = () => {
+		divingHoverTimer = setTimeout(() => {
+			divingOpen = false;
+			divingMenu?.classList.add('hidden');
+			divingBtn?.setAttribute('aria-expanded', 'false');
+			gsap.to(divingChevron, { rotation: 0, duration: 0.2, ease: 'power2.out' });
+		}, CLOSE_DELAY_MS);
+	};
+
+	divingDropdown?.addEventListener('mouseenter', openDiving);
+	divingDropdown?.addEventListener('mouseleave', closeDiving);
+	divingBtn?.addEventListener('click', (e) => {
+		e.preventDefault();
+		if (divingOpen) {
+			closeDiving();
+		} else {
+			openDiving();
+		}
+	});
+
 	const mobileMenuButton = document.getElementById('mobile-menu-button');
 	const mobileMenu = document.getElementById('mobile-menu');
 	mobileMenuButton?.addEventListener('click', () => {
 		mobileMenu?.classList.toggle('hidden');
+	});
+
+	const mobileDivingToggle = document.getElementById('mobile-diving-toggle');
+	const mobileDivingLinks = document.getElementById('mobile-diving-links');
+	const mobileDivingChevron = document.getElementById('mobile-diving-chevron');
+	let mobileDivingOpen = false;
+
+	mobileDivingToggle?.addEventListener('click', () => {
+		mobileDivingOpen = !mobileDivingOpen;
+		if (mobileDivingOpen) {
+			mobileDivingLinks?.classList.remove('hidden');
+			gsap.to(mobileDivingChevron, { rotation: 180, duration: 0.2, ease: 'power2.out' });
+		} else {
+			mobileDivingLinks?.classList.add('hidden');
+			gsap.to(mobileDivingChevron, { rotation: 0, duration: 0.2, ease: 'power2.out' });
+		}
 	});
 </script>

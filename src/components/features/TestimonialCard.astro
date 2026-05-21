@@ -12,10 +12,13 @@ interface Props {
 const { testimonial } = Astro.props;
 ---
 
-<Card>
-  <p class="text-text-secondary italic">"{testimonial.quote}"</p>
-  <div class="mt-6">
+<Card class="bg-white/95 backdrop-blur-sm border-ocean-muted/30 hover:border-ocean-muted transition-all duration-300">
+  <div class="flex items-start gap-3 mb-4">
+    <span class="text-4xl text-ocean-muted font-serif">"</span>
+    <p class="text-text-secondary italic leading-relaxed">{testimonial.quote}</p>
+  </div>
+  <div class="mt-6 pt-4 border-t border-ocean-muted/20">
     <p class="text-primary font-semibold">{testimonial.name}</p>
-    <p class="text-sm text-text-secondary">{testimonial.role}</p>
+    <p class="text-sm text-ocean-muted">{testimonial.role}</p>
   </div>
 </Card>

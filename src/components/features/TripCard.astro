@@ -1,6 +1,5 @@
 ---
 import Card from '../ui/Card.astro';
-import BookingButton from '../ui/BookingButton.astro';
 
 interface Props {
   trip: {
@@ -36,7 +35,7 @@ const { trip } = Astro.props;
     </div>
     <div class="flex items-center justify-between pt-4">
       <span class="text-xl font-semibold text-primary">${trip.price}</span>
-      <BookingButton itemType="trip" itemId={trip.id} label="Reserve Spot" />
+      <a href="/en/contact" class="inline-flex items-center justify-center rounded-md font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 bg-primary text-white hover:bg-opacity-90 ring-primary px-3 py-1.5 text-sm">Reserve Spot</a>
     </div>
   </div>
 </Card>

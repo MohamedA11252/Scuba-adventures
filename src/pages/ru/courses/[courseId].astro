@@ -21,7 +21,7 @@ const formattedDescription = formatDescription(course.longDescription);
 <MainLayout title={course.title} description={course.shortDescription}>
   <section class="pt-28 pb-16 bg-background" data-animate="fade-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <a href={`/${lang}/courses`} class="text-secondary hover:underline mb-8 inline-block">← {t.courses.backToCourses}</a>
+      <a href={`/${lang}/courses`} class="text-ocean-dark hover:underline mb-8 inline-block font-medium">← {t.courses.backToCourses}</a>
       
       <div class="grid md:grid-cols-2 gap-8 mb-12">
         <div class="relative h-96 overflow-hidden rounded-xl shadow-premium">
@@ -61,9 +61,9 @@ const formattedDescription = formatDescription(course.longDescription);
             )}
           </div>
           
-          <button class="w-full bg-secondary text-white py-3 rounded-md font-semibold hover:bg-opacity-90 transition-colors">
+          <a href={`/${lang}/contact`} class="block w-full bg-secondary text-white py-3 rounded-md font-semibold hover:bg-opacity-90 transition-colors text-center">
             {t.common.bookNow}
-          </button>
+          </a>
         </div>
       </div>
       

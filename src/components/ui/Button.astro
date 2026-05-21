@@ -1,6 +1,6 @@
 ---
 interface Props {
-    variant?: 'primary' | 'secondary' | 'outline';
+    variant?: 'primary' | 'secondary' | 'outline' | 'accent' | 'outline-white';
     size?: 'sm' | 'md' | 'lg';
     href?: string;
     type?: 'button' | 'submit' | 'reset';
@@ -13,8 +13,10 @@ const baseClasses = "inline-flex items-center justify-center rounded-md font-sem
 
 const variantClasses = {
     primary: 'bg-white text-primary hover:bg-opacity-90 ring-primary font-bold',
-    secondary: 'bg-secondary text-white hover:bg-opacity-90 ring-secondary',
+    secondary: 'bg-secondary text-white hover:bg-ocean-muted ring-secondary',
     outline: 'border border-white text-white hover:bg-white/10 ring-white',
+    accent: 'bg-accent text-white hover:bg-sand-light ring-accent',
+    'outline-white': 'border-2 border-white text-white hover:bg-white/20 ring-white',
 }
 
 const sizeClasses = {

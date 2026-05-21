@@ -22,7 +22,7 @@ const t = getTranslations(lang);
 const dayLabel = specialty.durationDays === 1 ? t.specialties.day : t.specialties.days;
 ---
 
-<Card className="overflow-hidden">
+<Card className="overflow-hidden card-hover border border-gray-200/50 hover:border-ocean-muted/50">
   <a href={`/${lang}/specialties/${specialty.id}`} class="block">
     <div class="h-48 w-full">
       <img src={specialty.image} alt={specialty.title} class="h-full w-full object-cover" loading="lazy" />
@@ -30,17 +30,18 @@ const dayLabel = specialty.durationDays === 1 ? t.specialties.day : t.specialtie
   </a>
   <div class="mt-6 space-y-3">
     <div class="flex items-center justify-between">
-      <h3 class="text-xl font-semibold">{specialty.title}</h3>
-      <span class="text-sm text-text-secondary">{specialty.certification}</span>
+      <h3 class="text-xl font-semibold text-gradient">{specialty.title}</h3>
+      <span class="text-sm text-ocean-muted font-medium">{specialty.certification}</span>
     </div>
     <p class="text-text-secondary">{specialty.shortDescription}</p>
     <div class="grid grid-cols-2 gap-4 text-sm text-text-secondary">
-      <span>{t.specialties.difficulty}: {specialty.difficulty}</span>
-      <span>{t.specialties.duration}: {specialty.durationDays} {dayLabel}</span>
-      <span>{t.specialties.equipment}: {specialty.equipment}</span>
+      <span>{t.specialties.difficulty}: <span class="font-medium text-primary">{specialty.difficulty}</span></span>
+      <span>{t.specialties.duration}: <span class="font-medium text-primary">{specialty.durationDays} {dayLabel}</span></span>
+      <span>{t.specialties.equipment}: <span class="font-medium text-primary">{specialty.equipment}</span></span>
     </div>
-    <div class="flex items-center justify-between pt-4">
-      <span class="text-xl font-semibold text-primary">€{specialty.price}</span>
+    <div class="flex items-center justify-between pt-4 border-t border-gray-200/50">
+      <span class="text-2xl font-bold text-ocean-dark">€{specialty.price}</span>
+      <a href={`/${lang}/contact`} class="inline-flex items-center justify-center rounded-md font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 bg-secondary text-white hover:bg-ocean-muted ring-secondary px-4 py-2 text-sm">{t.common.bookNow}</a>
     </div>
   </div>
 </Card>

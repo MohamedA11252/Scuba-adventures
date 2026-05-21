@@ -22,27 +22,27 @@ const testimonials = [
 <MainLayout title={t.home.title} description={t.home.description}>
 	<section class="relative h-screen" data-animate="hero">
 		<img src={getHeroImage()} alt="Scuba diver underwater" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
-		<div class="absolute inset-0 bg-primary/50"></div>
+		<div class="absolute inset-0 bg-gradient-to-b from-ocean-dark/75 via-ocean-dark/60 to-ocean-dark/85"></div>
 		<div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-			<h1 class="text-5xl md:text-7xl font-bold mb-4 text-white">{t.home.heroTitle}</h1>
-			<p class="text-lg md:text-xl max-w-2xl mb-8 text-white/90">{t.home.heroSubtitle}</p>
+			<h1 class="text-5xl md:text-7xl font-bold mb-4 text-white drop-shadow-lg">{t.home.heroTitle}</h1>
+			<p class="text-lg md:text-xl max-w-2xl mb-8 text-white/95 drop-shadow">{t.home.heroSubtitle}</p>
 			<div class="flex space-x-4">
 				<Button href={`${basePath}/courses`} variant="primary" size="lg">{t.home.exploreCourses}</Button>
 			</div>
 		</div>
 	</section>
 
-	<section id="about" class="py-20 bg-background" data-animate="fade-up">
+	<section id="about" class="py-20 bg-gradient-to-b from-background to-surface" data-animate="fade-up">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-			<h2 class="text-4xl font-bold mb-4">{t.home.aboutTitle}</h2>
+			<h2 class="text-4xl font-bold mb-4 text-gradient">{t.home.aboutTitle}</h2>
 			<p class="text-lg text-text-secondary max-w-3xl mx-auto">{t.home.aboutText}</p>
 		</div>
 	</section>
 
-	<section class="py-20 bg-background" data-animate="fade-up">
+	<section class="py-20 bg-surface" data-animate="fade-up">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="text-center mb-12">
-				<h2 class="text-4xl font-bold">{t.home.coursesTitle}</h2>
+				<h2 class="text-4xl font-bold text-gradient">{t.home.coursesTitle}</h2>
 				<p class="text-text-secondary mt-3">{t.home.coursesSubtitle}</p>
 			</div>
 			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -53,11 +53,11 @@ const testimonials = [
 		</div>
 	</section>
 
-	<section class="py-20 bg-surface" data-animate="fade-up">
+	<section class="py-20 bg-gradient-to-br from-ocean-dark via-ocean to-ocean-muted" data-animate="fade-up">
 		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="text-center mb-12">
-				<h2 class="text-4xl font-bold">{t.home.testimonialsTitle}</h2>
-				<p class="text-text-secondary mt-3">{t.home.testimonialsSubtitle}</p>
+				<h2 class="text-4xl font-bold text-white">{t.home.testimonialsTitle}</h2>
+				<p class="text-white/90 mt-3">{t.home.testimonialsSubtitle}</p>
 			</div>
 			<div class="grid md:grid-cols-3 gap-8">
 				{testimonials.map((testimonial) => (
@@ -69,14 +69,64 @@ const testimonials = [
 
 	<section class="py-20 bg-background" data-animate="fade-up">
 		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="bg-primary text-white rounded-2xl px-8 py-12 md:px-16 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8 shadow-premium">
+			<div class="bg-gradient-to-r from-ocean-dark to-ocean-muted text-white rounded-2xl px-8 py-12 md:px-16 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8 shadow-premium border border-ocean-muted/30">
 				<div>
-					<h2 class="text-4xl font-bold">{t.home.ctaTitle}</h2>
-					<p class="text-lg text-white/80 mt-3">{t.home.ctaSubtitle}</p>
+					<h2 class="text-4xl font-bold text-white">{t.home.ctaTitle}</h2>
+					<p class="text-lg text-white/95 mt-3">{t.home.ctaSubtitle}</p>
 				</div>
 				<div class="flex gap-4">
-					<Button href={`${basePath}/courses`} variant="secondary" size="lg">{t.home.ctaCourses}</Button>
-					<Button href={`${basePath}/contact`} variant="outline" size="lg">{t.home.ctaContact}</Button>
+					<Button href={`${basePath}/courses`} variant="accent" size="lg">{t.home.ctaCourses}</Button>
+					<Button href={`${basePath}/contact`} variant="outline-white" size="lg">{t.home.ctaContact}</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="about" class="py-20 bg-gradient-to-b from-background to-surface" data-animate="fade-up">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<h2 class="text-4xl font-bold mb-4 text-gradient">{t.home.aboutTitle}</h2>
+			<p class="text-lg text-text-secondary max-w-3xl mx-auto">{t.home.aboutText}</p>
+		</div>
+	</section>
+
+	<section class="py-20 bg-surface" data-animate="fade-up">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-12">
+				<h2 class="text-4xl font-bold text-gradient">{t.home.coursesTitle}</h2>
+				<p class="text-text-secondary mt-3">{t.home.coursesSubtitle}</p>
+			</div>
+			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+				{courses.map((course) => (
+					<CourseCard course={course} lang={lang} />
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 bg-gradient-to-br from-ocean-dark via-ocean to-ocean-muted" data-animate="fade-up">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-12">
+				<h2 class="text-4xl font-bold text-white">{t.home.testimonialsTitle}</h2>
+				<p class="text-white/90 mt-3">{t.home.testimonialsSubtitle}</p>
+			</div>
+			<div class="grid md:grid-cols-3 gap-8">
+				{testimonials.map((testimonial) => (
+					<TestimonialCard testimonial={testimonial} />
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 bg-background" data-animate="fade-up">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="bg-gradient-to-r from-ocean-dark to-ocean-muted text-white rounded-2xl px-8 py-12 md:px-16 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8 shadow-premium border border-ocean-muted/30">
+				<div>
+					<h2 class="text-4xl font-bold text-white">{t.home.ctaTitle}</h2>
+					<p class="text-lg text-white/95 mt-3">{t.home.ctaSubtitle}</p>
+				</div>
+				<div class="flex gap-4">
+					<Button href={`${basePath}/courses`} variant="accent" size="lg">{t.home.ctaCourses}</Button>
+					<Button href={`${basePath}/contact`} variant="outline-white" size="lg">{t.home.ctaContact}</Button>
 				</div>
 			</div>
 		</div>
