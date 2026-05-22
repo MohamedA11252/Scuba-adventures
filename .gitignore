@@ -24,11 +24,6 @@ pnpm-debug.log*
 public/uploads/*
 !public/uploads/.gitkeep
 
-# sqlite database
-local.db
-local.db-wal
-local.db-shm
-
 # macOS-specific files
 .DS_Store
 
