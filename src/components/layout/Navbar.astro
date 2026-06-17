@@ -35,8 +35,7 @@ const accountHref = user ? `${basePath}/dashboard` : `${basePath}/signin`;
 const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 ---
 
-header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-[#4832C9] backdrop-blur-md shadow-md border-b border-ocean-muted/20">		<div class="flex items-center justify-between h-20">
-			<div class="flex-shrink-0">
+header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-[#4832C9] backdrop-blur-md shadow-md border-b border-ocean-muted/20">			<div class="flex-shrink-0">
 				<a href={`${basePath}/`} class="flex items-center gap-2">
 					<img src="/uploads/WhatsApp Image 2026-06-08 at 11,59,49 PM-Picsart-BackgroundRemover.jpeg" alt="Scuba Academy Logo" class="h-10 w-10 sm:h-12 sm:w-12" />
 					<span data-i18n-key="brand.name" class="text-base sm:text-xl font-bold text-ocean-dark tracking-tight">{BRAND_NAME}</span>
