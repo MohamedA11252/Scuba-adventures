@@ -34,20 +34,21 @@ const langOptions = [
 const accountHref = user ? `${basePath}/dashboard` : `${basePath}/signin`;
 const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 ---
+<header id="main-header" class="relative top-0 left-0 w-full z-50 bg-zinc-800 backdrop-blur-md shadow-md border-b border-ocean-muted/20">
+  
+  <div class="p-2 flex items-center justify-between w-full">
+    
+    <a href={`/${basePath}/`} class="flex items-center gap-2 group">
+      <img src="/uploads/mikasa.png" alt="Scuba Adventures Logo" class="h-14 w-auto" />
+    </a>
 
-<header id="main-header" class="relative top-0 left-0 w-full z-50 bg-zinc-800 backdrop-blur-md shadow-md border-b border-ocean-muted/20">			<div class="flex-shrink-0">
-				 <a href={`${basePath}/`} class="flex items-center gap-2 group">
-  <div class="border-2 border-[#f2c94c] p-2 flex items-center justify-center">
-  <img src="/uploads/SCUBA%20ADVENTURES-Picsart-BackgroundRemover.png" alt="Scuba Adventures Logo" class="h-8" />
-</div>
-</a>
-			</div>
-			<div class="hidden md:block">
+    <div class="hidden md:block">
 				<div class="ml-10 flex items-baseline space-x-1">
-					{navLinks.map((link) => (
-						<a href={link.href} class="text-text-secondary hover:text-ocean-dark px-3 py-2 rounded-md text-sm font-medium transition-colors">{link.text}</a>
-					))}
-					<div class="relative" id="diving-dropdown">
+{navLinks.map((link) => (
+            <a href={link.href} class="text-yellow-500 hover:text-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition">
+              {link.text}
+            </a>
+          ))}					<div class="relative" id="diving-dropdown">
 						<button type="button" class="diving-dropdown-btn text-text-secondary hover:text-ocean-dark px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1" aria-haspopup="true" aria-expanded="false">
 							<span data-i18n-key="nav.diving">{t.nav.diving}</span>
 							<ChevronDownIcon class="w-4 h-4 diving-chevron transition-transform duration-200 text-ocean-muted" />
@@ -60,7 +61,36 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 					</div>
 				</div>
 			</div>
-			<div class="hidden md:flex items-center space-x-4">
+			<div class="flex items-center gap-2 mr-2">
+
+    <button
+      type="button"
+      data-theme-btn="dark"
+      class="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-600 hover:border-[#f2c94c]"
+      title="Dark Mode"
+    >
+      🌙
+    </button>
+
+    <button
+      type="button"
+      data-theme-btn="light"
+      class="w-8 h-8 rounded-full bg-white border border-zinc-300 hover:border-[#f2c94c]"
+      title="Light Mode"
+    >
+      ☀️
+    </button>
+
+    <button
+      type="button"
+      data-theme-btn="extra-light"
+      class="w-8 h-8 rounded-full bg-slate-50 border border-slate-200 hover:border-[#f2c94c]"
+      title="Extra Light"
+    >
+      ✨
+    </button>
+
+  </div>
 				<div class="relative" id="lang-menu-desktop">
 					<button type="button" class="text-text-secondary hover:text-ocean-dark flex items-center gap-2 text-sm font-medium transition-colors" aria-haspopup="true" aria-expanded="false">
 						<GlobeIcon />
@@ -72,7 +102,7 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 						))}
 					</div>
 				</div>
-				<a href={accountHref} class="bg-secondary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-ocean-muted transition-colors">{accountLabel}</a>
+				<a href={accountHref} class="bg-yellow-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-ocean-muted transition-colors">{accountLabel}</a>
 			</div>
 			<div class="-mr-2 flex md:hidden">
 				<button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-text-secondary hover:text-ocean-dark focus:outline-none transition-colors" aria-haspopup="true" aria-expanded="false">
@@ -161,8 +191,8 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 			divingOpen = true;
 			divingMenu?.classList.remove('hidden');
 			divingBtn?.setAttribute('aria-expanded', 'true');
-			gsap.to(divingChevron, { rotation: 180, duration: 0.2, ease: 'power2.out' });
-			gsap.fromTo(divingMenu, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' });
+			gsap.to(divingChevron!, { rotation: 180, duration: 0.2, ease: 'power2.out' });
+			gsap.fromTo(divingMenu!, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' });
 		}
 	};
 
@@ -171,13 +201,13 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 			divingOpen = false;
 			divingMenu?.classList.add('hidden');
 			divingBtn?.setAttribute('aria-expanded', 'false');
-			gsap.to(divingChevron, { rotation: 0, duration: 0.2, ease: 'power2.out' });
+			gsap.to(divingChevron!, { rotation: 0, duration: 0.2, ease: 'power2.out' });
 		}, CLOSE_DELAY_MS);
 	};
 
-	dvingDropdown?.addEventListener('mouseenter', openDiving);
-	dvingDropdown?.addEventListener('mouseleave', closeDiving);
-	dvingBtn?.addEventListener('click', (e) => {
+	divingDropdown?.addEventListener('mouseenter', openDiving);
+	divingDropdown?.addEventListener('mouseleave', closeDiving);
+	divingBtn?.addEventListener('click', (e) => {
 		e.preventDefault();
 		if (divingOpen) {
 			closeDiving();
@@ -225,4 +255,25 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 			gsap.to(mobileDivingChevron, { rotation: 0, duration: 0.2, ease: 'power2.out' });
 		}
 	});
+document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const theme = btn.getAttribute('data-theme-btn');
+
+    document.documentElement.setAttribute(
+      'data-theme',
+      theme ?? 'light'
+    );
+
+    localStorage.setItem('theme', theme?? 'light');
+  });
+});
+
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme) {
+  document.documentElement.setAttribute(
+    'data-theme',
+    savedTheme
+  );
+}
 </script>

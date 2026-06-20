@@ -43,3 +43,24 @@
     @apply bg-gradient-to-r from-ocean-dark to-ocean-muted bg-clip-text text-transparent;
   }
 }
+:root 
+[data-theme="dark"] {
+  --bg: #181d28;
+  --text: #ffffff;
+}
+
+[data-theme="light"] {
+  --bg: #ffffff;
+  --text: #b9a211;
+}
+
+[data-theme="extra-light"] {
+  --bg: #f8fbff;
+  --text: #0f172a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
