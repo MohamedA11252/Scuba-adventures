@@ -1,6 +1,6 @@
 import { createClient } from '@libsql/client';
 import { Argon2id } from 'oslo/password';
-import { courses as mockCourses, specialties as mockSpecialties } from '../lib/mock-data';
+import { courses as mockCourses, specialties as mockSpecialties } from '../lib/scuba-images.js';
 
 const TURSO_DB_URL = process.env.TURSO_DB_URL;
 const TURSO_DB_TOKEN = process.env.TURSO_DB_TOKEN;
@@ -24,6 +24,13 @@ const tables = [
   )`,
   `CREATE TABLE IF NOT EXISTS instructors (
     id TEXT PRIMARY KEY, name TEXT NOT NULL, bio TEXT, avatar_url TEXT
+  )`,
+  `CREATE TABLE IF NOT EXISTS comments (
+    id TEXT PRIMARY KEY,
+    author TEXT NOT NULL,
+    content TEXT NOT NULL,
+    post_id TEXT NOT NULL,
+    created_at INTEGER NOT NULL
   )`,
   `CREATE TABLE IF NOT EXISTS courses (
     id TEXT PRIMARY KEY, title TEXT NOT NULL, description TEXT NOT NULL,

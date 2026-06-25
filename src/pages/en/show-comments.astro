@@ -1,0 +1,43 @@
+---
+// 1. استيراد أداة قاعدة البيانات (عدل المسار حسب مشروعك)
+import { db } from '../../db/client'; 
+
+// 2. جلب التعليقات من الجدول (افترضنا إن اسم الجدول comments)
+// وتقدر ترتبهم من الأحدث للأقدم
+const comments = db.prepare('SELECT * FROM comments ORDER BY id DESC').all();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Guest Comments</title>
+    <style>
+      /* شوية ستايل سريع عشان العين تشوفه حلو */
+      .comments-container { max-width: 600px; margin: 40px auto; font-family: sans-serif; }
+      .comment-card { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 8px; background-color: #f9f9f9; }
+      .comment-author { font-weight: bold; color: #333; }
+      .comment-date { font-size: 0.8rem; color: #666; margin-bottom: 8px; }
+    </style>
+  </head>
+  <body>
+
+    <div class="comments-container">
+      <h2>SIR "AboSaid" HERE IS YOUR GUEST COMMENTS </h2>
+
+      {comments.length === 0 ? (
+        <p>مفيش أي تعليقات اتكتبت لسه!</p>
+      ) : (
+        comments.map((comment) => (
+          <div class="comment-card"> 
+            <div class="comment-author">Name: {comment.author}</div>
+            <div class="comment-level">Level: {comment.level}</div>
+            <p class="comment-text">Comment: {comment.content}</p>
+            <div class="comment-rating">Rating: {comment.rating}</div>
+            <div class="comment-date">Date: {new Date(comment.created_at).toLocaleString('en-US')}</div>
+          </div>
+        ))
+      )}
+    </div>
+
+  </body>
+</html>

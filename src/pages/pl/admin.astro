@@ -40,6 +40,7 @@ const data = await dashboardService.getAdminDashboard();
           <p class="text-text-secondary" data-i18n-key="admin.stats.totalBookings">Total Bookings</p>
           <p class="text-3xl font-bold mt-2">{data.stats.totalBookings}</p>
         </div>
+       
       </div>
 
       <AdminCatalogPanel t={t} data={data} />

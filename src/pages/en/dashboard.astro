@@ -44,6 +44,13 @@ if (!session) {
                     <h2 class="text-2xl font-semibold mb-3" data-i18n-key="dashboard.certifications">{t.dashboard.certifications}</h2>
                     <p class="text-text-secondary" data-i18n-key="dashboard.noBookings">{t.dashboard.noBookings}</p>
                 </Card>
+                {user?.email === 'admin@scubaadventures.com' && (
+                <Card>
+                    <h2 class="text-2xl font-semibold mb-3">Manage Comments</h2>
+                    <p class="text-text-secondary">Review and moderate the latest comments.</p>
+                    <a href="/en/show-comments" class="text-blue-500 hover:underline">View Comments</a>
+                </Card>
+)}
             </div>
         </div>
     </section>

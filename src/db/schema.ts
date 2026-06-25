@@ -1,6 +1,6 @@
 import type Database from 'better-sqlite3';
 
-export const createTables = (db: Database) => {
+export const createTables = (db: any) => {
     db.exec(`
         CREATE TABLE IF NOT EXISTS users (
             id TEXT PRIMARY KEY,
@@ -22,6 +22,16 @@ export const createTables = (db: Database) => {
             name TEXT NOT NULL,
             bio TEXT,
             avatar_url TEXT
+        );
+
+        CREATE TABLE IF NOT EXISTS comments (
+            id TEXT PRIMARY KEY,
+            author TEXT NOT NULL,
+            content TEXT NOT NULL,
+            post_id TEXT NOT NULL,
+            level TEXT NOT NULL,
+            rating INTEGER NOT NULL,
+            created_at INTEGER NOT NULL
         );
 
         CREATE TABLE IF NOT EXISTS courses (

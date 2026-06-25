@@ -38,7 +38,7 @@ const testimonials = lang === 'pl' ? testimonialsPL : lang === 'ru' ? testimonia
 		<img src={getHeroImage()} alt="Scuba diver underwater" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
 		<div class="absolute inset-0 bg-gradient-to-b from-ocean-dark/75 via-ocean-dark/60 to-ocean-dark/85"></div>
 		<div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 sm:px-6">
-			<h1 class="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 text-white drop-shadow-lg leading-tight" data-i18n-key="home.heroTitle">{t.home.heroTitle}</h1>
+			<h1 class="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 text-yellow-500 drop-shadow-lg leading-tight" data-i18n-key="home.heroTitle">{t.home.heroTitle}</h1>
 			<p class="text-base sm:text-lg md:text-xl max-w-2xl mb-8 text-white/95 drop-shadow" data-i18n-key="home.heroSubtitle">{t.home.heroSubtitle}</p>
 			<div class="flex flex-col sm:flex-row gap-3 sm:space-x-4 w-full sm:w-auto">
 				<Button href={`${basePath}/courses`} variant="primary" size="lg" className="w-full sm:w-auto" data-i18n-key="home.exploreCourses">{t.home.exploreCourses}</Button>
@@ -53,7 +53,7 @@ const testimonials = lang === 'pl' ? testimonialsPL : lang === 'ru' ? testimonia
 		</div>
 	</section>
 
-	<section class="py-12 sm:py-20 bg-surface" data-animate="fade-up">
+	<section class="py-12 sm:py-20 bg-yellow-500" data-animate="fade-up">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="text-center mb-8 sm:mb-12">
 				<h2 class="text-2xl sm:text-4xl font-bold text-gradient" data-i18n-key="home.coursesTitle">{t.home.coursesTitle}</h2>

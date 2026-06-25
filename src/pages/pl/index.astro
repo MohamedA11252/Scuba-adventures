@@ -24,7 +24,7 @@ const testimonials = [
 		<img src={getHeroImage()} alt="Scuba diver underwater" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
 		<div class="absolute inset-0 bg-gradient-to-b from-ocean-dark/75 via-ocean-dark/60 to-ocean-dark/85"></div>
 		<div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 sm:px-6">
-			<h1 class="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 text-white drop-shadow-lg leading-tight" data-i18n-key="home.heroTitle">{t.home.heroTitle}</h1>
+			<h1 class="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 text-yellow-500 drop-shadow-lg leading-tight" data-i18n-key="home.heroTitle">{t.home.heroTitle}</h1>
 			<p class="text-base sm:text-lg md:text-xl max-w-2xl mb-8 text-white/95 drop-shadow" data-i18n-key="home.heroSubtitle">{t.home.heroSubtitle}</p>
 			<div class="flex flex-col sm:flex-row gap-3 sm:space-x-4 w-full sm:w-auto">
 				<Button href={`${basePath}/courses`} variant="primary" size="lg" class="w-full sm:w-auto" data-i18n-key="home.exploreCourses">{t.home.exploreCourses}</Button>
@@ -39,7 +39,7 @@ const testimonials = [
 		</div>
 	</section>
 
-	<section class="py-12 sm:py-20 bg-surface" data-animate="fade-up">
+	<section class="py-12 sm:py-20 bg-yellow-500" data-animate="fade-up">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="text-center mb-8 sm:mb-12">
 				<h2 class="text-2xl sm:text-4xl font-bold text-gradient" data-i18n-key="home.coursesTitle">{t.home.coursesTitle}</h2>
@@ -69,6 +69,17 @@ const testimonials = [
 
 	<section class="py-12 sm:py-20 bg-background" data-animate="fade-up">
 		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="bg-yellow-500 p-6 rounded-lg text-center my-8 flex flex-col items-center gap-4">
+        <p class="text-white font-bold text-2xl" style="font-family: inherit;">opowiedz mi o swoich doświadczeniach</p>
+        <Button 
+          href="/pl/guest-comments" 
+          variant="accent" 
+          size="lg" 
+          className="w-full sm:w-auto bg-slate-900 text-white hover:bg-slate-800 transition-all"
+        >
+          zostaw komentarz
+        </Button>
+      </div>
 			<div class="bg-gradient-to-r from-ocean-dark to-ocean-muted text-white rounded-2xl px-6 sm:px-8 md:px-16 py-10 sm:py-12 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-6 sm:gap-8 shadow-premium border border-ocean-muted/30">
 				<div class="text-center md:text-left">
 					<h2 class="text-2xl sm:text-4xl font-bold text-white" data-i18n-key="home.ctaTitle">{t.home.ctaTitle}</h2>
@@ -83,52 +94,4 @@ const testimonials = [
 	</section>
 
 	<section id="about" class="py-20 bg-gradient-to-b from-background to-surface" data-animate="fade-up">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-			<h2 class="text-4xl font-bold mb-4 text-gradient" data-i18n-key="home.aboutTitle">{t.home.aboutTitle}</h2>
-			<p class="text-lg text-text-secondary max-w-3xl mx-auto" data-i18n-key="home.aboutText">{t.home.aboutText}</p>
-		</div>
-	</section>
-
-	<section class="py-20 bg-surface" data-animate="fade-up">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="text-center mb-12">
-				<h2 class="text-4xl font-bold text-gradient" data-i18n-key="home.coursesTitle">{t.home.coursesTitle}</h2>
-				<p class="text-text-secondary mt-3" data-i18n-key="home.coursesSubtitle">{t.home.coursesSubtitle}</p>
-			</div>
-			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{courses.map((course) => (
-					<CourseCard course={course} lang={lang} />
-				))}
-			</div>
-		</div>
-	</section>
-
-	<section class="py-20 bg-gradient-to-br from-ocean-dark via-ocean to-ocean-muted" data-animate="fade-up">
-		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="text-center mb-12">
-				<h2 class="text-4xl font-bold text-white" data-i18n-key="home.testimonialsTitle">{t.home.testimonialsTitle}</h2>
-				<p class="text-white/90 mt-3" data-i18n-key="home.testimonialsSubtitle">{t.home.testimonialsSubtitle}</p>
-			</div>
-			<div class="grid md:grid-cols-3 gap-8">
-				{testimonials.map((testimonial) => (
-					<TestimonialCard testimonial={testimonial} />
-				))}
-			</div>
-		</div>
-	</section>
-
-	<section class="py-20 bg-background" data-animate="fade-up">
-		<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="bg-gradient-to-r from-ocean-dark to-ocean-muted text-white rounded-2xl px-8 py-12 md:px-16 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8 shadow-premium border border-ocean-muted/30">
-				<div>
-					<h2 class="text-4xl font-bold text-white" data-i18n-key="home.ctaTitle">{t.home.ctaTitle}</h2>
-					<p class="text-lg text-white/95 mt-3" data-i18n-key="home.ctaSubtitle">{t.home.ctaSubtitle}</p>
-				</div>
-				<div class="flex gap-4">
-					<Button href={`${basePath}/courses`} variant="accent" size="lg" data-i18n-key="home.ctaCourses">{t.home.ctaCourses}</Button>
-					<Button href={`${basePath}/contact`} variant="outline-white" size="lg" data-i18n-key="home.ctaContact">{t.home.ctaContact}</Button>
-				</div>
-			</div>
-		</div>
-	</section>
 </MainLayout>

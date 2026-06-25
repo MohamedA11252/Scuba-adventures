@@ -104,6 +104,16 @@ if (tursoClient) {
         updated_at INTEGER NOT NULL
       )`);
       await tursoClient!.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_page_content_key ON page_content(page, section, key, lang)`);
+      await tursoClient!.execute(`
+        CREATE TABLE IF NOT EXISTS comments (
+        id TEXT PRIMARY KEY,
+        author TEXT NOT NULL,
+        content TEXT NOT NULL,
+        post_id TEXT NOT NULL,
+        level TEXT NOT NULL,
+        rating INTEGER NOT NULL,
+        created_at INTEGER NOT NULL
+     )`);
     } catch {}
   })();
 }
@@ -115,7 +125,7 @@ export const isDbAvailable = isTurso || isLocal;
 
 export async function dbAll<T = Record<string, unknown>>(sql: string, params?: unknown[]): Promise<T[]> {
   if (tursoClient) {
-    const rs = await tursoClient.execute({ sql, args: params ?? [] });
+    const rs = await tursoClient.execute({ sql, args: (params ?? []) as any });
     return rs.rows as unknown as T[];
   }
   if (localDb) {
@@ -126,7 +136,7 @@ export async function dbAll<T = Record<string, unknown>>(sql: string, params?: u
 
 export async function dbGet<T = Record<string, unknown>>(sql: string, params?: unknown[]): Promise<T | null> {
   if (tursoClient) {
-    const rs = await tursoClient.execute({ sql, args: params ?? [] });
+    const rs = await tursoClient.execute({ sql, args: (params ?? []) as any });
     return (rs.rows[0] as unknown as T) ?? null;
   }
   if (localDb) {
@@ -137,7 +147,7 @@ export async function dbGet<T = Record<string, unknown>>(sql: string, params?: u
 
 export async function dbRun(sql: string, params?: unknown[]): Promise<{ changes: number; lastInsertRowid: number | bigint | null }> {
   if (tursoClient) {
-    const rs = await tursoClient.execute({ sql, args: params ?? [] });
+    const rs = await tursoClient.execute({ sql, args: (params ?? []) as any });
     return { changes: Number(rs.rowsAffected), lastInsertRowid: null };
   }
   if (localDb) {
