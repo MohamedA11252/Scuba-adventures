@@ -1,6 +1,7 @@
 ---
+export const prerender = false;
 import Layout from '../../layouts/Layout.astro';
-import { dbRun } from '../../db/client'; // التعديل هنا: سحبنا الدالة الذكية
+import { dbRun } from '../../db/client';
 
 let successMessage = '';
 let errorMessage = '';
@@ -17,13 +18,12 @@ if (Astro.request.method === 'POST') {
         const rating = formData.get('rating')?.toString();
 
         if (name && content && formPostId && level && rating && rating !== '0') {
-           // التعديل هنا: استخدام dbRun وتمرير البيانات في مصفوفة (Array) لحماية وتوافق الكود
            await dbRun(
                'INSERT INTO comments (id, author, content, post_id, level, rating, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
                [crypto.randomUUID(), name, content, formPostId, level, parseInt(rating), Date.now()]
            );
-        
-           return Astro.redirect(Astro.url.pathname);    
+           
+           successMessage = 'Thank you for your comment! It has been submitted successfully.';
         } else {
             errorMessage = 'Please fill out all required fields and rate your trip.';
         }
@@ -46,7 +46,7 @@ if (Astro.request.method === 'POST') {
         {successMessage && <p class="text-green-500 mb-4">{successMessage}</p>}
         {errorMessage && <p class="text-red-500 mb-4">{errorMessage}</p>}
       
-      <form id="comment-form" method="POST" class="flex flex-col gap-5">
+      <form id="comment-form" method="POST" data-astro-reload class="flex flex-col gap-5">
         <input type="hidden" name="postId" value={postId} />
         
         <div class="flex flex-col gap-2">
@@ -111,6 +111,11 @@ if (Astro.request.method === 'POST') {
           Submit Comment
         </button>
       </form>
+      {successMessage && (
+         <div class="my-4 text-center text-green-500 font-semibold">
+         <p>{successMessage}</p>
+         <a href="/" class="mt-4 inline-block px-4 py-2 bg-yellow-600 hover:bg-yellow-500 text-slate-950 font-bold rounded-lg">Go to Home</a>
+        </div> )} 
     </section>
 
     <hr class="my-8 border-slate-800" />
