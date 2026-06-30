@@ -164,11 +164,19 @@ Return & Drop-off (4:00-5:00 PM): Head back to the marina before your transfer r
       </div>
 
       <div class="text-center py-4" data-animate="fade-up">
-        <a href={`/${lang}/contact`} class="inline-block bg-secondary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-semibold hover:bg-ocean-muted transition-colors text-base sm:text-lg w-full sm:w-auto" data-i18n-key="discover-diving.book-now">
-          {discoverDiving.bookNow}
-        </a>
+        <div>
+         <style>.pp-2TECER7MUD6ZW{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
+         <form action="https://www.paypal.com/ncp/payment/2TECER7MUD6ZW" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+         <input class="pp-2TECER7MUD6ZW" type="submit" value="Check Out" />
+         <img src=https://www.paypalobjects.com/images/Debit_Credit.svg alt="cards" />
+     <section style="font-size: 0.75rem;"> مدعوم من <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+  </form>
+</div>
 
       </div>
     </div>
   </section>
+  <script
+  src="https://www.paypal.com/sdk/js?client-id=BAAFa_jVHYWSZcNSOynAOqc_d9niNoHt74-ZF13RRRkICiqIZOc7YWVokwjRS_5CUtuL1EGzquSI8bYVXY&components=hosted-buttons&disable-funding=venmo&currency=EUR">
+</script>
 </MainLayout>

@@ -1,102 +1,115 @@
 ---
 export const prerender = false;
-import { db } from '../../db/client'; 
-
-// الجزء ده عشان يلقط لو دوست على زرار المسح ويمسح الكومنت من الداتا بيز
-if (Astro.request.method === 'POST') {
-  try {
-    const formData = await Astro.request.formData();
-    const deleteId = formData.get('deleteId')?.toString();
-    
-    if (deleteId && db) {
-       (db as any).prepare('DELETE FROM comments WHERE id = ?').run(deleteId);
-    }
-  } catch (error) {
-    console.error("Error deleting comment:", error);
-  }
-}
+import Layout from '../../layouts/Layout.astro';
+import { dbAll } from '../../db/client';
 
 let comments: any[] = [];
-if (db) {
-  comments = (db as any).prepare('SELECT * FROM comments ORDER BY id DESC').all() || [];
+let errorMessage = '';
+
+// Fetch all comments from database
+try {
+    comments = await dbAll('SELECT * FROM comments ORDER BY created_at DESC LIMIT 100');
+} catch (error) {
+    console.error("Error fetching comments:", error);
+    errorMessage = 'Failed to load comments. Please try again later.';
+    comments = [];
 }
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Guest Comments</title>
-    <style>
-      /* شوية ستايل سريع عشان العين تشوفه حلو */
-      .comments-container { max-width: 600px; margin: 40px auto; font-family: sans-serif; }
-      .comment-card { 
-        border: 1px solid #ddd; 
-        padding: 15px; 
-        margin-bottom: 15px; 
-        border-radius: 8px; 
-        background-color: #f9f9f9; 
-        position: relative; /* ضفناها عشان نظبط مكان زرار المسح */
-      }
-      .comment-author { font-weight: bold; color: #333; }
-      .comment-date { font-size: 0.8rem; color: #666; margin-bottom: 8px; }
+<Layout title="All Guest Comments | Scuba Adventures">
+  <main class="max-w-4xl mx-auto my-12 p-6 bg-slate-900 rounded-xl shadow-2xl text-white border border-slate-800">
+    
+    <h1 class="text-3xl md:text-4xl font-bold mb-2 text-center" style="color: #ecca0ad2; font-family: inherit;">
+      Guest Comments
+    </h1>
+    <p class="text-center text-slate-400 mb-8">What our guests are saying about their experience</p>
+    
+    {errorMessage && (
+      <div class="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded-lg mb-8">
+        {errorMessage}
+      </div>
+    )}
+
+    <!-- Comments Display Section -->
+    <section class="comments-display-section">
+      <div class="mb-6 flex items-center justify-between">
+        <h2 class="text-2xl font-semibold text-slate-300">
+          All Comments ({comments.length})
+        </h2>
+        <a 
+          href="/en/guest-comments" 
+          class="px-4 py-2 bg-yellow-600 hover:bg-yellow-500 text-slate-950 font-semibold rounded-lg transition-all"
+        >
+          Leave a Comment
+        </a>
+      </div>
       
-      /* ستايل زرار المسح الأحمر */
-      .delete-btn {
-        background-color: #dc2626; 
-        color: white;
-        border: none;
-        border-radius: 4px;
-        width: 30px;
-        height: 30px;
-        font-weight: bold;
-        font-size: 16px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s;
-      }
-      .delete-btn:hover {
-        background-color: #b91c1c; 
-      }
-      .delete-form {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        margin: 0;
-      }
-    </style>
-  </head>
-  <body>
-
-    <div class="comments-container">
-      <h2>SIR "AboSaid" HERE IS YOUR GUEST COMMENTS </h2>
-
-      {comments.length === 0 ? (
-        <p>مفيش أي تعليقات اتكتبت لسه!</p>
+      {comments.length > 0 ? (
+        <div class="space-y-6">
+          {comments.map((comment: any) => (
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-slate-600 transition-all">
+              <!-- Comment Header -->
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <h3 class="font-semibold text-white text-lg">{comment.author}</h3>
+                  <p class="text-sm text-slate-400 capitalize">{comment.level.replace('-', ' ')}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="text-yellow-500 text-xl">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span key={i} style={{color: i < comment.rating ? '#ecca0ad2' : '#4b5563'}}>
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <span class="text-slate-400 text-sm bg-slate-700 px-2 py-1 rounded">{comment.rating}/5</span>
+                </div>
+              </div>
+              
+              <!-- Comment Content -->
+              <p class="text-slate-300 mb-4 leading-relaxed text-base">{comment.content}</p>
+              
+              <!-- Comment Footer -->
+              <p class="text-xs text-slate-500">
+                {new Date(comment.created_at).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </p>
+            </div>
+          ))}
+        </div>
       ) : (
-        comments.map((comment) => (
-          <div class="comment-card"> 
-            
-            {/* فورم المسح اللي جواه الزرار الأحمر ورسالة التأكيد */}
-            <form 
-              method="POST" 
-              class="delete-form"
-              onsubmit="return confirm('Are you sure that you want to delete this message?');"
-            >
-              <input type="hidden" name="deleteId" value={comment.id} />
-              <button type="submit" class="delete-btn" title="Delete Comment">X</button>
-            </form>
-
-            <div class="comment-author">Name: {comment.author}</div>
-            <div class="comment-level">Level: {comment.level}</div>
-            <p class="comment-text">Comment: {comment.content}</p>
-            <div class="comment-rating">Rating: {comment.rating}</div>
-            <div class="comment-date">Date: {new Date(comment.created_at).toLocaleString('en-US')}</div>
-          </div>
-        ))
+        <div class="text-center py-16">
+          <p class="text-slate-400 text-lg mb-4">No comments yet.</p>
+          <a 
+            href="/en/guest-comments" 
+            class="inline-block px-6 py-3 bg-yellow-600 hover:bg-yellow-500 text-slate-950 font-bold rounded-lg transition-all"
+          >
+            Be the first to share your experience!
+          </a>
+        </div>
       )}
-    </div>
+    </section>
 
-  </body>
-</html>
+    <!-- Back to Home -->
+    <div class="mt-12 text-center">
+      <a 
+        href="/en" 
+        class="text-slate-400 hover:text-yellow-500 transition-colors underline"
+      >
+        ← Back to Home
+      </a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Optional: Add smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

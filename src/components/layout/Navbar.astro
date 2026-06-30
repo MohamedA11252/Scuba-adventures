@@ -38,8 +38,8 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
   
   <div class="p-2 flex items-center justify-between w-full">
     
-    <a href={`/${basePath}/`} class="flex items-center gap-2 group">
-      <img src="/uploads/mikasa.png" alt="Scuba Adventures Logo" class="h-14 w-auto" />
+    <a href={`/${lang}/`} class="flex items-center gap-2 group">
+      <img src="/mikasa.png?v=2" alt="Scuba Adventures Logo" class="h-14 w-auto" loading="eager" />
     </a>
 
     <div class="hidden md:block">
@@ -105,18 +105,18 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 				<a href={accountHref} class="bg-yellow-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-ocean-muted transition-colors">{accountLabel}</a>
 			</div>
 			<div class="-mr-2 flex md:hidden">
-				<button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-text-secondary hover:text-ocean-dark focus:outline-none transition-colors" aria-haspopup="true" aria-expanded="false">
+				<button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-text-secondary hover:text-ocean-dark focus:outline-none transition-colors" aria-expanded="false">
 					<MenuIcon />
 				</button>
 			</div>
 		</div>
-	</nav>
+	</header>
 
 	<div id="mobile-menu" class="md:hidden hidden border-t border-ocean-muted/20 bg-white max-h-[80vh] overflow-y-auto">
 		<div class="px-4 pt-3 pb-4 space-y-1">
 			<a href={`${basePath}/`} class="mobile-nav-link text-text-secondary hover:text-ocean-dark block px-3 py-3 rounded-lg text-base font-medium transition-colors" data-i18n-key="nav.home">{t.nav.home}</a>
 			<div class="mobile-diving-section">
-				<button type="button" id="mobile-diving-toggle" class="w-full text-left text-text-secondary hover:text-ocean-dark px-3 py-3 rounded-lg text-base font-medium flex items-center justify-between transition-colors" aria-expanded="false">
+				<button type="button" id="mobile-diving-toggle" class="w-full text-left text-text-secondary hover:text-ocean-dark px-3 py-3 rounded-lg text-base font-medium flex items-center justify-between transition-colors">
 					<span data-i18n-key="nav.diving">{t.nav.diving}</span>
 					<ChevronDownIcon id="mobile-diving-chevron" class="w-5 h-5 transition-transform duration-200 text-ocean-muted" />
 				</button>
@@ -139,7 +139,6 @@ const accountLabel = user ? t.nav.dashboard : t.nav.signIn;
 			</div>
 		</div>
 	</div>
-</header>
 
 <script>
 	import { gsap } from 'gsap';
