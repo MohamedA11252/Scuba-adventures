@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import PayPalButton from '../../components/ui/PayPalButton.astro';
 import { getTranslations, getLangFromPathname } from '../../lib/i18n';
 
 const lang = getLangFromPathname(Astro.url.pathname);
@@ -56,11 +57,12 @@ Return & Drop-off (4:00-5:00 PM): Head back to the marina before your transfer r
     "Sunscreen and hat",
     "Change of clothes for after the dive"
   ],
-  bookNow: "Reserve Your Spot",
+  bookNow: "Book Now",
   priceLabel: "Price",
-  price: "€50.00 per person",
+  price: "50.00",
   priceNote: "Free transfer from Hurghada hotels included",
-  duration: "1 Day (2 dives)"
+  duration: "1 Day (2 dives)",
+  currency: "EUR"
 };
 ---
 <MainLayout title={discoverDiving.title} description={discoverDiving.subtitle}>
@@ -104,11 +106,19 @@ Return & Drop-off (4:00-5:00 PM): Head back to the marina before your transfer r
           </div>
         </div>
 
-        <!-- Price -->
-        <div class="bg-accent/10 border border-accent/30 rounded-lg p-4 sm:p-6 text-center">
+        <!-- Price & PayPal Button -->
+        <div class="bg-accent/10 border border-accent/30 rounded-lg p-4 sm:p-6">
           <h3 class="text-lg sm:text-xl font-bold text-primary mb-1">{discoverDiving.priceLabel}</h3>
-          <p class="text-2xl sm:text-3xl font-bold text-accent mb-1">{discoverDiving.price}</p>
-          <p class="text-sm text-text-secondary">{discoverDiving.priceNote}</p>
+          <p class="text-2xl sm:text-3xl font-bold text-accent mb-4">{discoverDiving.currency} {discoverDiving.price}</p>
+          <p class="text-sm text-text-secondary mb-4">{discoverDiving.priceNote}</p>
+          <PayPalButton 
+            price={discoverDiving.price}
+            currency={discoverDiving.currency}
+            productName={discoverDiving.title}
+            itemId="discover-diving-01"
+            itemType="course"
+            priceLabel={discoverDiving.bookNow}
+          />
         </div>
       </div>
 
@@ -162,21 +172,6 @@ Return & Drop-off (4:00-5:00 PM): Head back to the marina before your transfer r
           <img src="/images/discover-diving/WhatsApp Image 2026-05-22 at 5.23.53 PM.jpeg" alt="Discover Scuba Diving - Marine" class="w-full h-48 object-cover rounded-lg shadow-sm" loading="lazy" />
         </div>
       </div>
-
-      <div class="text-center py-4" data-animate="fade-up">
-        <div>
-         <style>.pp-2TECER7MUD6ZW{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
-         <form action="https://www.paypal.com/ncp/payment/2TECER7MUD6ZW" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-         <input class="pp-2TECER7MUD6ZW" type="submit" value="Check Out" />
-         <img src=https://www.paypalobjects.com/images/Debit_Credit.svg alt="cards" />
-     <section style="font-size: 0.75rem;"> مدعوم من <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-  </form>
-</div>
-
-      </div>
     </div>
   </section>
-  <script
-  src="https://www.paypal.com/sdk/js?client-id=BAAFa_jVHYWSZcNSOynAOqc_d9niNoHt74-ZF13RRRkICiqIZOc7YWVokwjRS_5CUtuL1EGzquSI8bYVXY&components=hosted-buttons&disable-funding=venmo&currency=EUR">
-</script>
 </MainLayout>

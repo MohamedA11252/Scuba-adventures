@@ -1,0 +1,72 @@
+---
+interface Props {
+  price: string | number;
+  priceLabel?: string;
+  productName?: string;
+  currency?: string;
+  itemId?: string;
+  itemType?: "course" | "trip" | "specialty";
+}
+
+const { 
+  price, 
+  priceLabel = "Book Now",
+  productName = "Scuba Adventure", 
+  currency = "EUR",
+  itemId = "default",
+  itemType = "course"
+} = Astro.props;
+
+// Format price for PayPal
+const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+const formattedPrice = numPrice.toFixed(2);
+---
+
+<div class="paypal-button-wrapper">
+  <button 
+    class="pp-book-now-btn inline-flex items-center justify-center rounded-md font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 bg-primary text-white hover:bg-opacity-90 ring-primary px-4 py-2 text-sm w-full"
+    data-price={formattedPrice}
+    data-currency={currency}
+    data-product-name={productName}
+    data-item-id={itemId}
+    data-item-type={itemType}
+  >
+    {priceLabel}
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll(".pp-book-now-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      
+      const price = button.dataset.price;
+      const currency = button.dataset.currency;
+      const productName = encodeURIComponent(button.dataset.productName);
+      const itemId = button.dataset.itemId;
+      const itemType = button.dataset.itemType;
+
+      // Redirect to PayPal checkout with price in URL
+      const paypalCheckoutUrl = `/checkout?price=${price}&currency=${currency}&product=${productName}&itemId=${itemId}&itemType=${itemType}`;
+      
+      window.location.href = paypalCheckoutUrl;
+    });
+  });
+</script>
+
+<style>
+  .pp-book-now-btn {
+    background: linear-gradient(135deg, #0070ba 0%, #003087 100%);
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 112, 186, 0.3);
+  }
+
+  .pp-book-now-btn:hover {
+    background: linear-gradient(135deg, #005ea6 0%, #002875 100%);
+    box-shadow: 0 4px 12px rgba(0, 112, 186, 0.5);
+  }
+
+  .pp-book-now-btn:active {
+    transform: scale(0.98);
+  }
+</style>

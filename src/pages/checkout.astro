@@ -1,0 +1,103 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getLangFromPathname, getTranslations } from '../lib/i18n';
+
+const lang = getLangFromPathname(Astro.url.pathname);
+const t = getTranslations(lang);
+
+// Get query parameters
+const url = new URL(Astro.request.url);
+const price = url.searchParams.get('price') || '0.00';
+const currency = url.searchParams.get('currency') || 'EUR';
+const product = url.searchParams.get('product') || 'Scuba Adventure';
+const itemId = url.searchParams.get('itemId') || 'default';
+const itemType = url.searchParams.get('itemType') || 'course';
+---
+
+<MainLayout title={`Checkout - ${product}`} description="Complete your booking with PayPal">
+  <section class="pt-24 sm:pt-28 pb-12 sm:pb-16 bg-background">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-surface rounded-xl shadow-premium border border-ocean-muted/20 p-8">
+        <h1 class="text-3xl font-bold text-primary mb-8 text-center">Complete Your Booking</h1>
+        
+        <!-- Order Summary -->
+        <div class="bg-background rounded-lg p-6 mb-8 border border-ocean-muted/10">
+          <h2 class="text-xl font-semibold text-primary mb-4">Order Summary</h2>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-text-secondary">Product:</span>
+              <span class="font-semibold text-primary">{decodeURIComponent(product)}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-text-secondary">Item ID:</span>
+              <span class="font-mono text-sm text-ocean-muted">{itemId}</span>
+            </div>
+            <div class="border-t border-ocean-muted/10 pt-3 flex justify-between items-center">
+              <span class="text-lg font-semibold text-primary">Total Price:</span>
+              <span class="text-2xl font-bold text-secondary">{currency} {price}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PayPal Container -->
+        <div id="paypal-button-container" class="mb-6">
+          <p class="text-center text-text-secondary">Loading PayPal...</p>
+        </div>
+
+        <!-- Payment Methods Info -->
+        <div class="bg-ocean-muted/10 rounded-lg p-4 text-center">
+          <img 
+            src="https://www.paypalobjects.com/images/Debit_Credit.svg" 
+            alt="Payment methods" 
+            class="h-6 mx-auto mb-2"
+          />
+          <p class="text-xs text-text-secondary">
+            Powered by <img 
+              src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" 
+              alt="PayPal" 
+              class="h-4 inline align-middle"
+            />
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script is:inline define:vars={{ price, currency, product, itemId, itemType }}>
+  // Load PayPal SDK
+  const script = document.createElement('script');
+  script.src = 'https://www.paypal.com/sdk/js?client-id=BAAFa_jVHYWSZcNSOynAOqc_d9niNoHt74-ZF13RRRkICiqIZOc7YWVokwjRS_5CUtuL1EGzquSI8bYVXY&components=buttons&currency=' + currency;
+  script.async = true;
+  script.onload = () => {
+    if (typeof paypal !== 'undefined') {
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: price,
+                currency_code: currency
+              },
+              description: `${decodeURIComponent(product)} (ID: ${itemId})`
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            // Payment successful
+            window.location.href = `/en/booking-success?booking_id=${itemId}&transaction_id=${details.id}`;
+          });
+        },
+        onError: function(err) {
+          console.error('PayPal Error:', err);
+          alert('Payment error: ' + err.message);
+        },
+        onCancel: function(data) {
+          window.location.href = '/en/booking-cancelled';
+        }
+      }).render('#paypal-button-container');
+    }
+  };
+  document.head.appendChild(script);
+</script>
