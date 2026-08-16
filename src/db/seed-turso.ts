@@ -65,6 +65,9 @@ const tables = [
     is_read INTEGER NOT NULL DEFAULT 0, created_at INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
   )`,
+  `CREATE TABLE IF NOT EXISTS contact_messages (
+    id TEXT PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL, message TEXT NOT NULL, created_at INTEGER NOT NULL
+  )`,
 ];
 
 for (const sql of tables) {
@@ -102,7 +105,7 @@ if (existingCourses === 0) {
     await turso.execute({
       sql: `INSERT INTO courses (id, title, description, short_description, long_description, price, duration, difficulty, seats, certification, instructor_id, image_url, next_start, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      args: [c.id, c.title, c.shortDescription, c.shortDescription, c.longDescription ?? c.shortDescription, c.price, c.durationDays, c.difficulty, c.seats, c.certification, null, c.image, c.nextStart ?? null, Date.now()],
+      args: [c.id, c.title, c.shortDescription, c.shortDescription, c.longDescription ?? c.shortDescription, c.price, c.durationDays, c.difficulty, c.seats, c.certification, null, c.image, c.nextStart ?? null, Date.now()]
     });
   }
   console.log(`Seeded ${mockCourses.length} courses`);
