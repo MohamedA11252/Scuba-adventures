@@ -105,6 +105,14 @@ export const createTables = (db: any) => {
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         );
 
+        CREATE TABLE IF NOT EXISTS contact_messages (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            message TEXT NOT NULL,
+            created_at INTEGER NOT NULL
+        );
+
         CREATE TABLE IF NOT EXISTS page_content (
             id TEXT PRIMARY KEY,
             page TEXT NOT NULL,
