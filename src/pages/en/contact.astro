@@ -64,7 +64,7 @@ if (Astro.request.method === 'POST') {
         </Card>
         <Card>
           <h2 class="text-xl sm:text-2xl font-semibold mb-4" data-i18n-key="contact.sendTitle">{t.contact.sendTitle}</h2>
-          <form method="POST" class="space-y-4">
+          <form id="contact-form" method="POST" class="space-y-4">
             <div>
               <label for="name" class="text-sm text-text-secondary" data-i18n-key="contact.name">{t.contact.name}</label>
               <Input id="name" name="name" placeholder={t.contact.namePlaceholder} data-i18n-key="contact.namePlaceholder" />
@@ -84,3 +84,14 @@ if (Astro.request.method === 'POST') {
     </div>
   </section>
 </MainLayout>
+
+<script is:inline>
+  const form = document.getElementById('contact-form');
+  
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      // Allow natural form submission to work with server-side POST handler
+      // No need to preventDefault - let the form post naturally to the server
+    });
+  }
+</script>
