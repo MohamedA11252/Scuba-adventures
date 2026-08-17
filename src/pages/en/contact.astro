@@ -5,7 +5,7 @@ import Input from '../../components/ui/Input.astro';
 import Button from '../../components/ui/Button.astro';
 import { BRAND_WHATSAPP_1, BRAND_WHATSAPP_2 } from '../../lib/brand';
 import { getLangFromPathname, getTranslations } from '../../lib/i18n';
-import { dbRun } from '../../db/client';
+import { dbRun, isDbAvailable } from '../../db/client';
 import { randomUUID } from 'crypto';
 
 const lang = getLangFromPathname(Astro.url.pathname);
@@ -16,21 +16,42 @@ let errorMessage: string | null = null;
 
 if (Astro.request.method === 'POST') {
   try {
+    console.log('=== CONTACT FORM SUBMISSION ===');
+    console.log('Database available:', isDbAvailable);
+    
     const formData = await Astro.request.formData();
     const name = String(formData.get('name') ?? '').trim();
     const email = String(formData.get('email') ?? '').trim();
     const message = String(formData.get('message') ?? '').trim();
 
+    console.log('Form data:', { name: name ? '✓' : '✗', email: email ? '✓' : '✗', message: message ? '✓' : '✗' });
+
     if (!name || !email || !message) {
       errorMessage = 'Please fill in all fields.';
+      console.log('Validation failed - empty fields');
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       errorMessage = 'Please provide a valid email address.';
+      console.log('Validation failed - invalid email');
     } else {
-      await dbRun('INSERT INTO contact_messages (id, name, email, message, created_at) VALUES (?, ?, ?, ?, ?)', [randomUUID(), name, email, message, Date.now()]);
+      const messageId = randomUUID();
+      console.log('Attempting to insert message with ID:', messageId);
+      
+      const result = await dbRun(
+        'INSERT INTO contact_messages (id, name, email, message, created_at) VALUES (?, ?, ?, ?, ?)', 
+        [messageId, name, email, message, Date.now()]
+      );
+      
+      console.log('Database insert result:', result);
+      console.log('Message saved successfully!');
       return Astro.redirect(`/${lang}/contact?sent=1`);
     }
   } catch (err) {
-    console.error('Contact form error:', err);
+    console.error('=== CONTACT FORM ERROR ===');
+    console.error('Error type:', err instanceof Error ? err.constructor.name : typeof err);
+    console.error('Error message:', err instanceof Error ? err.message : String(err));
+    console.error('Error stack:', err instanceof Error ? err.stack : 'No stack trace');
+    console.error('Full error object:', err);
+    
     errorMessage = 'An unexpected error occurred. Please try again later.';
   }
 }
