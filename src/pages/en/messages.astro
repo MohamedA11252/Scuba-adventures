@@ -10,42 +10,54 @@ const t = getTranslations(lang);
 
 const { user, session } = await lucia.validateSession(Astro.cookies.get(lucia.sessionCookieName)?.value ?? "");
 if (!session) return Astro.redirect(`/${lang}/signin`);
-if (user?.role !== 'ADMIN') return Astro.redirect(`/${lang}/dashboard`);
+if (user?.email !== 'admin@scubaadventures.com') return Astro.redirect(`/${lang}/dashboard`);
 
-const messages = await dbAll('SELECT id, name, email, message, created_at FROM contact_messages ORDER BY created_at DESC');
+let messages: any[] = [];
+try {
+  messages = await dbAll('SELECT id, name, email, message, created_at FROM contact_messages ORDER BY created_at DESC');
+} catch (err) {
+  console.error('Error fetching messages:', err);
+}
 ---
 
 <MainLayout title="Messages" description="Contact messages inbox">
   <section class="pt-28 pb-16 bg-background">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between mb-8">
-        <h1 class="text-3xl font-bold">Messages</h1>
+        <h1 class="text-3xl font-bold">Contact Messages</h1>
+        <a href={`/${lang}/dashboard`} class="text-blue-500 hover:underline">Back to Dashboard</a>
       </div>
 
-      <Card>
-        <div class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead>
-              <tr class="text-left text-text-secondary">
-                <th class="py-3 px-4">Name</th>
-                <th class="py-3 px-4">Email</th>
-                <th class="py-3 px-4">Message</th>
-                <th class="py-3 px-4">Received</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-100">
-              {messages.map((m) => (
-                <tr>
-                  <td class="py-3 px-4 font-medium">{m.name}</td>
-                  <td class="py-3 px-4 text-sm text-text-secondary">{m.email}</td>
-                  <td class="py-3 px-4 text-sm text-text-secondary max-w-md break-words">{m.message}</td>
-                  <td class="py-3 px-4 text-sm text-text-secondary">{new Date(Number(m.created_at)).toLocaleString()}</td>
+      {messages.length === 0 ? (
+        <Card>
+          <p class="text-text-secondary text-center py-8">No messages yet.</p>
+        </Card>
+      ) : (
+        <Card>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr class="text-left text-text-secondary">
+                  <th class="py-3 px-4">Name</th>
+                  <th class="py-3 px-4">Email</th>
+                  <th class="py-3 px-4">Message</th>
+                  <th class="py-3 px-4">Received</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Card>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-100">
+                {messages.map((m) => (
+                  <tr>
+                    <td class="py-3 px-4 font-medium">{m.name}</td>
+                    <td class="py-3 px-4 text-sm text-text-secondary">{m.email}</td>
+                    <td class="py-3 px-4 text-sm text-text-secondary max-w-md break-words">{m.message}</td>
+                    <td class="py-3 px-4 text-sm text-text-secondary">{new Date(Number(m.created_at)).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      )}
     </div>
   </section>
 </MainLayout>
