@@ -6,11 +6,19 @@ import TestimonialCard from '../../components/features/TestimonialCard.astro';
 import { getCoursesByLang } from '../../lib/course-translations';
 import { getHeroImage } from '../../lib/catalog';
 import { getLangFromPathname, getTranslations } from '../../lib/i18n';
+import { dbAll } from '../../db/client';
 
 const lang = getLangFromPathname(Astro.url.pathname);
 const t = getTranslations(lang);
 const basePath = `/${lang}`;
 const courses = getCoursesByLang(lang).slice(0, 3);
+
+let featuredComments: any[] = [];
+try {
+  featuredComments = await dbAll('SELECT id, author, content, level, rating, created_at FROM comments WHERE featured = 1 ORDER BY created_at DESC LIMIT 6');
+} catch {
+  featuredComments = [];
+}
 
 const testimonialsEN = [
   { name: "Ava Holm", role: "Advanced Diver", quote: "The training felt calm, intentional, and incredibly premium. I left with full confidence in my skills." },
@@ -94,6 +102,38 @@ const testimonials = lang === 'pl' ? testimonialsPL : lang === 'ru' ? testimonia
           Leave a Comment
         </Button>
       </div>
+
+      {featuredComments.length > 0 && (
+        <div class="mb-10">
+          <h3 class="text-2xl sm:text-3xl font-bold text-primary text-center mb-2">What Our Guests Say</h3>
+          <p class="text-text-secondary text-center mb-8">Real experiences shared by our divers.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredComments.map((comment) => (
+              <div class="bg-surface rounded-xl shadow-premium border border-gray-200/50 p-6 flex flex-col">
+                <div class="flex items-center justify-between mb-3">
+                  <div>
+                    <p class="font-semibold text-primary text-lg">{comment.author}</p>
+                    <p class="text-sm text-text-secondary capitalize">{comment.level.replace('-', ' ')}</p>
+                  </div>
+                  <div class="text-lg">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span style={`color: ${i < comment.rating ? '#ecca0ad2' : '#d1d5db'}`}>★</span>
+                    ))}
+                  </div>
+                </div>
+                <p class="text-text-secondary leading-relaxed flex-grow italic">"{comment.content}"</p>
+                <p class="text-xs text-text-secondary/70 mt-4">
+                  {new Date(comment.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div class="text-center mt-8">
+            <a href="/en/show-comments" class="text-secondary hover:underline font-medium">Read all comments →</a>
+          </div>
+        </div>
+      )}
+
 			<div class="bg-gradient-to-r from-ocean-dark to-ocean-muted text-white rounded-2xl px-6 sm:px-8 md:px-16 py-10 sm:py-12 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-6 sm:gap-8 shadow-premium border border-ocean-muted/30">
 				<div class="text-center md:text-left">
 					<h2 class="text-2xl sm:text-4xl font-bold text-white" data-i18n-key="home.ctaTitle">{t.home.ctaTitle}</h2>
