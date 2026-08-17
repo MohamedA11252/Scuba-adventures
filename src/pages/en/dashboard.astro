@@ -45,12 +45,19 @@ if (!session) {
                     <p class="text-text-secondary" data-i18n-key="dashboard.noBookings">{t.dashboard.noBookings}</p>
                 </Card>
                 {user?.email === 'admin@scubaadventures.com' && (
+                <>
                 <Card>
                     <h2 class="text-2xl font-semibold mb-3">Manage Comments</h2>
                     <p class="text-text-secondary">Review and moderate the latest comments.</p>
                     <a href="/en/show-comments" class="text-blue-500 hover:underline">View Comments</a>
                 </Card>
-)}
+                <Card>
+                    <h2 class="text-2xl font-semibold mb-3">Contact Messages</h2>
+                    <p class="text-text-secondary">View all messages submitted through the contact form.</p>
+                    <a href="/en/messages" class="text-blue-500 hover:underline">View Messages</a>
+                </Card>
+                </>
+                )}
             </div>
         </div>
     </section>
