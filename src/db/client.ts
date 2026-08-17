@@ -32,6 +32,7 @@ if (!TURSO_DB_URL) {
     ensureColumn(localDb, 'courses', 'short_description', 'TEXT');
     ensureColumn(localDb, 'courses', 'long_description', 'TEXT');
     ensureColumn(localDb, 'trips', 'image_url', 'TEXT');
+    ensureColumn(localDb, 'comments', 'featured', 'INTEGER NOT NULL DEFAULT 0');
   } catch {
     localDb = null;
   }
@@ -112,8 +113,12 @@ if (tursoClient) {
         post_id TEXT NOT NULL,
         level TEXT NOT NULL,
         rating INTEGER NOT NULL,
+        featured INTEGER NOT NULL DEFAULT 0,
         created_at INTEGER NOT NULL
      )`);
+      try {
+        await tursoClient!.execute(`ALTER TABLE comments ADD COLUMN featured INTEGER NOT NULL DEFAULT 0`);
+      } catch {}
     } catch {}
   })();
 }
