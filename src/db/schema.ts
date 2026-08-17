@@ -31,6 +31,7 @@ export const createTables = (db: any) => {
             post_id TEXT NOT NULL,
             level TEXT NOT NULL,
             rating INTEGER NOT NULL,
+            featured INTEGER NOT NULL DEFAULT 0,
             created_at INTEGER NOT NULL
         );
 
