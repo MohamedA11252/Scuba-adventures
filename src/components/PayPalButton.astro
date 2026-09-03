@@ -17,8 +17,36 @@ const {
   itemType = "course"
 } = Astro.props;
 
-// Format price for PayPal
-const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+// Normalize price for PayPal (accepts strings like "€1000", "1.000,00", "1,000.00", "1000€")
+let numPrice: number;
+if (typeof price === 'string') {
+  // keep only digits, dot, comma and minus sign
+  const cleaned = price.replace(/[^0-9.,-]/g, '');
+
+  if (cleaned === '' || cleaned === '-' || cleaned === ',') {
+    numPrice = 0;
+  } else {
+    // If both dot and comma exist, decide which is thousand separator and which is decimal
+    if (cleaned.indexOf('.') > -1 && cleaned.indexOf(',') > -1) {
+      // If dot comes before comma, treat dot as thousand separator: "1.234,56" -> "1234.56"
+      if (cleaned.indexOf('.') < cleaned.indexOf(',')) {
+        numPrice = parseFloat(cleaned.replace(/\./g, '').replace(',', '.'));
+      } else {
+        // comma comes before dot: "1,234.56" -> remove commas
+        numPrice = parseFloat(cleaned.replace(/,/g, ''));
+      }
+    } else {
+      // Only one of dot/comma exists or none
+      const normalized = cleaned.replace(/,/g, '.');
+      numPrice = parseFloat(normalized);
+    }
+
+    if (!isFinite(numPrice)) numPrice = 0;
+  }
+} else {
+  numPrice = Number(price) || 0;
+}
+
 const formattedPrice = numPrice.toFixed(2);
 ---
 
