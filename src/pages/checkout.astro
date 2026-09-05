@@ -12,6 +12,33 @@ const currency = url.searchParams.get('currency') || 'EUR';
 const product = url.searchParams.get('product') || 'Scuba Adventure';
 const itemId = url.searchParams.get('itemId') || 'default';
 const itemType = url.searchParams.get('itemType') || 'course';
+
+// Normalize price to ensure it's a valid number for PayPal
+let numPrice: number;
+if (typeof price === 'string') {
+  const cleaned = price.replace(/[^0-9.,-]/g, '');
+  
+  if (cleaned === '' || cleaned === '-' || cleaned === ',') {
+    numPrice = 0;
+  } else {
+    if (cleaned.indexOf('.') > -1 && cleaned.indexOf(',') > -1) {
+      if (cleaned.indexOf('.') < cleaned.indexOf(',')) {
+        numPrice = parseFloat(cleaned.replace(/\./g, '').replace(',', '.'));
+      } else {
+        numPrice = parseFloat(cleaned.replace(/,/g, ''));
+      }
+    } else {
+      const normalized = cleaned.replace(/,/g, '.');
+      numPrice = parseFloat(normalized);
+    }
+    
+    if (!isFinite(numPrice)) numPrice = 0;
+  }
+} else {
+  numPrice = Number(price) || 0;
+}
+
+const formattedPrice = numPrice.toFixed(2);
 ---
 
 <MainLayout title={`Checkout - ${product}`} description="Complete your booking with PayPal">
@@ -34,7 +61,7 @@ const itemType = url.searchParams.get('itemType') || 'course';
             </div>
             <div class="border-t border-ocean-muted/10 pt-3 flex justify-between items-center">
               <span class="text-lg font-semibold text-primary">Total Price:</span>
-              <span class="text-2xl font-bold text-secondary">{currency} {price}</span>
+              <span class="text-2xl font-bold text-secondary">{currency} {formattedPrice}</span>
             </div>
           </div>
         </div>
@@ -64,10 +91,11 @@ const itemType = url.searchParams.get('itemType') || 'course';
   </section>
 </MainLayout>
 
-<script is:inline define:vars={{ price, currency, product, itemId, itemType }}>
+<script is:inline define:vars={{ formattedPrice, currency, product, itemId, itemType }}>
   // Load PayPal SDK
   const script = document.createElement('script');
-  script.src = 'https://www.paypal.com/sdk/js?client-id=AW1vnVydIllAOH0MLzXDIdmlCS6fafy3mJi51FJlhYmdtpr37Ql3oDeJ39HFrmbIFvNb_zRdOMe2kJok&currency=' + currency;  script.async = true;
+  script.src = 'https://www.paypal.com/sdk/js?client-id=AW1vnVydIllAOH0MLzXDIdmlCS6fafy3mJi51FJlhYmdtpr37Ql3oDeJ39HFrmbIFvNb_zRdOMe2kJok&currency=' + currency;
+  script.async = true;
   script.onload = () => {
     if (typeof paypal !== 'undefined') {
       paypal.Buttons({
@@ -75,7 +103,7 @@ const itemType = url.searchParams.get('itemType') || 'course';
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: price,
+                value: formattedPrice,
                 currency_code: currency
               },
               description: `${decodeURIComponent(product)} (ID: ${itemId})`
