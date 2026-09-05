@@ -3,13 +3,20 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import { getAdventureTranslations } from '../../lib/adventure-translations';
 import { getLangFromPathname, getTranslations } from '../../lib/i18n';
 import { formatDescription } from '../../lib/format-description';
-import PayPalButton from '../../components/PayPalButton.astro'; // تم إضافة الاستيراد
+import PayPalButton from '../../components/PayPalButton.astro';
 
 const lang = getLangFromPathname(Astro.url.pathname);
 const t = getTranslations(lang);
 const adventure = getAdventureTranslations(lang);
 
 const { routes, shared } = adventure;
+
+// Function to extract numeric price from formatted price string
+function extractNumericPrice(priceStr: string): string {
+  // Extract all digits from the price string (e.g., "€1000" -> "1000.00")
+  const match = priceStr.match(/\d+/);
+  return match ? match[0] + '.00' : '0.00';
+}
 ---
 
 <MainLayout title="One Week Adventure" description="Explore the Red Sea with our one-week liveaboard adventures.">
@@ -17,7 +24,7 @@ const { routes, shared } = adventure;
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16" data-animate="fade-up">
         <h1 class="text-5xl font-bold text-primary mb-4" data-i18n-key="one-week-adventure.page-title">One Week Adventure</h1>
-        <p class="text-xl text-text-secondary max-w-3xl mx-auto" data-i18n-key="one-week-adventure.page-subtitle">Experience the best of the Red Sea with our carefully crafted one-week liveaboard diving safaris. Choose from three incredible routes.</p>
+        <p class="text-xl text-text-secondary max-w-3xl mx-auto" data-i18n-key="one-week-adventure.page-subtitle">Experience the best of the Red Sea with our carefully crafted one-week liveaboard [...]</p>
       </div>
 
       <div class="mb-16 rounded-xl overflow-hidden shadow-premium" data-animate="fade-up">
@@ -63,7 +70,7 @@ const { routes, shared } = adventure;
                 </div>
 
                 <PayPalButton 
-                    price={route.rawPrice || 0} 
+                    price={extractNumericPrice(route.price)}
                     currency="EUR" 
                     productName={route.title}
                     itemId={route.id}
@@ -82,7 +89,7 @@ const { routes, shared } = adventure;
                     </div>
                   ))}
                 </div>
-                <p class="text-xs text-text-secondary mt-2 italic" data-i18n-key="one-week-adventure.rental-equipment-note">If you require any equipment, please let us know so we can have it available.</p>
+                <p class="text-xs text-text-secondary mt-2 italic" data-i18n-key="one-week-adventure.rental-equipment-note">If you require any equipment, please let us know so we can have it avail[...]</p>
               </div>
             </div>
           </div>
